@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">CrazySellOut</string>
+
+    <string-array name="items">
+        <item>gmail.com</item>
+        <item>gmail.gr</item>
+        <item>hotmail.com</item>
+        <item>hotmail.gr</item>
+        <item>yahoo.com</item>
+        <item>yahoo.gr</item>
+        <item>outlook.com</item>
+        <item>outlook.gr</item>
+    </string-array>
+
+</resources>
