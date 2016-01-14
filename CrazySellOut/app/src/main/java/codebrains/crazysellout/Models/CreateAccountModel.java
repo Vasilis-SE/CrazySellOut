@@ -52,6 +52,48 @@ public class CreateAccountModel {
 
     }
 
+    /**
+     * Method that checks if any of the fields contain invalid characters.
+     */
+    public void FieldContainsInvalidCharacters(){
+
+        try {
+            if(this.newAccountJSON.get("username").toString().matches("[^~#@*+%{}<>\\[\\]|\"\\_^]*") ||
+                    this.newAccountJSON.get("password").toString().matches("[^~#@*+%{}<>\\[\\]|\"\\_^]*") ||
+                    this.newAccountJSON.get("emailName").toString().matches("[^~#@*+%{}<>\\[\\]|\"\\_^]*")) {
+
+                this.newAccountJSON.put("status", false);
+                this.newAccountJSON.put("message", "One or more fields contain invalid characters!\n" +
+                        "Please fill all the required fields properly.");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Method that checks if any of the fields contain less characters than the required.
+     * Username filed must contain at least 8 characters, password at least 6 characters and number
+     * at least 10.
+     */
+    public void FieldsContainTheWrightCharacterLength(){
+
+        try {
+            if(this.newAccountJSON.get("username").toString().length() < 8 ||
+                    this.newAccountJSON.get("password").toString().length() < 6 ||
+                    this.newAccountJSON.get("number").toString().length() < 10 ) {
+
+                this.newAccountJSON.put("status", false);
+                this.newAccountJSON.put("message", "One or more fields contain less characters from" +
+                        " the required length!\n Please fill all the fields properly.");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    
+
 
 
 

@@ -29,6 +29,8 @@ public class CreateAccountController {
 
         cam.IsTermAndConditionsAgreed();
         cam.FieldEmpty();
+        cam.FieldContainsInvalidCharacters();
+        cam.FieldsContainTheWrightCharacterLength();
 
 
         try {
