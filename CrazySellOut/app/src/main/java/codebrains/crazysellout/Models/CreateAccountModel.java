@@ -92,7 +92,22 @@ public class CreateAccountModel {
         }
     }
 
-    
+
+    public void PasswordAndRepasswordMismatch(){
+
+        try {
+            if(!this.newAccountJSON.get("password").toString().equals(
+                    this.newAccountJSON.get("repassword").toString())){
+
+                this.newAccountJSON.put("status", false);
+                this.newAccountJSON.put("message", "The password field and re-type password field mismatch!");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
 

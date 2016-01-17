@@ -31,6 +31,7 @@ public class CreateAccountController {
         cam.FieldEmpty();
         cam.FieldContainsInvalidCharacters();
         cam.FieldsContainTheWrightCharacterLength();
+        cam.PasswordAndRepasswordMismatch();
 
 
         try {
