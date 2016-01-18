@@ -38,9 +38,6 @@ public class CreateAccountController {
             if(this.newAccountJSON.get("status") == false){
                 return this.newAccountJSON.get("message").toString();
             }
-            else{
-                return "Account has been created successfully!";
-            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

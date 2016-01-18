@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import codebrains.crazysellout.AsyncTasks.AttemptCreateAccount;
 import codebrains.crazysellout.Controllers.CreateAccountController;
 import codebrains.crazysellout.R;
 import codebrains.crazysellout.Adapters.Tabsadapter;
@@ -208,7 +209,13 @@ public class MainActivity extends ActionBarActivity implements  android.support.
         CreateAccountController cac = new CreateAccountController(jObj);
         String result = cac.CreateNewAccountControlMethod();
 
-        this.DisplayAlertBoxToUser("Create Account Process", result);
+        if(result.equals("")){
+            new AttemptCreateAccount(this, jObj).execute();
+        }
+        else{
+            this.DisplayAlertBoxToUser("Create Account Process", result);
+        }
+
     }
 
 
