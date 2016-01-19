@@ -2,6 +2,8 @@ package codebrains.crazysellout.AsyncTasks;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.widget.Toast;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
@@ -44,9 +46,6 @@ public class AttemptCreateAccount extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
 
-            // Check for success tag
-            int success;
-
             try {
                 // Building Parameters
                 List<NameValuePair> parameters = new ArrayList<NameValuePair>();
@@ -62,10 +61,11 @@ public class AttemptCreateAccount extends AsyncTask<String, String, String> {
                 JSONObject json = this.jsonParser.makeHttpRequest("http://crazysellout.comule.com/test.php",
                         "POST", parameters);
 
-                // json success tag
-                success = json.getInt(TAG_SUCCESS);
 
-                if (success == 1) {
+                if (json.get("success") == 1) {
+
+                    return json.get("message").toString();
+
                     /*
                     Intent i = new Intent(Login.this, ReadComments.class);
                     finish();
@@ -73,7 +73,7 @@ public class AttemptCreateAccount extends AsyncTask<String, String, String> {
                     return json.getString(TAG_MESSAGE);
                     */
                 }else{
-                    return json.getString(TAG_MESSAGE);
+                    return json.get("message").toString();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -85,12 +85,18 @@ public class AttemptCreateAccount extends AsyncTask<String, String, String> {
         /**
          * Method that will be called when the background process is complete.
          *
-         * @param file_url
+         * @param response
          */
-        protected void onPostExecute(String file_url) {
+        protected void onPostExecute(String response) {
 
             // dismiss the dialog once product deleted
             pDialog.dismiss();
+
+            // display the response from the server.
+            if (response != null){
+                Toast.makeText(this.mainActivity, response, Toast.LENGTH_LONG).show();
+            }
+
 
         }
 

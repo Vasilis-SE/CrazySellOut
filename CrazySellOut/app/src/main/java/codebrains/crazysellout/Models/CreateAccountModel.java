@@ -1,5 +1,7 @@
 package codebrains.crazysellout.Models;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -57,10 +59,12 @@ public class CreateAccountModel {
      */
     public void FieldContainsInvalidCharacters(){
 
+        //Regex string pattern that allows letters and numbers only.
+        String pattern= "^[a-zA-Z0-9]*$";
         try {
-            if(this.newAccountJSON.get("username").toString().matches("[^~#@*+%{}<>\\[\\]|\"\\_^]*") ||
-                    this.newAccountJSON.get("password").toString().matches("[^~#@*+%{}<>\\[\\]|\"\\_^]*") ||
-                    this.newAccountJSON.get("emailName").toString().matches("[^~#@*+%{}<>\\[\\]|\"\\_^]*")) {
+            if(!this.newAccountJSON.get("username").toString().matches(pattern) ||
+                    !this.newAccountJSON.get("password").toString().matches(pattern) ||
+                    !this.newAccountJSON.get("emailName").toString().matches(pattern)) {
 
                 this.newAccountJSON.put("status", false);
                 this.newAccountJSON.put("message", "One or more fields contain invalid characters!\n" +
