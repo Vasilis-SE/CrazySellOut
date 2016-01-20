@@ -8,10 +8,14 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import codebrains.crazysellout.Activities.MainActivity;
-import codebrains.crazysellout.Models.JSONParser;
+import codebrains.crazysellout.System.JSONParser;
+import codebrains.crazysellout.System.Encryption;
 
 /**
  * AsyncTask is a seperate thread than the thread that runs the GUI Any type of networking
@@ -47,9 +51,37 @@ public class AttemptCreateAccount extends AsyncTask<String, String, String> {
         protected String doInBackground(String... params) {
 
             try {
+
+                String fullEmailAddress = this.newAccountJSON.get("emailName")+"@"+this.newAccountJSON.get("emailService");
+
+                //Removing all the unnecessary data from JSON Object
+                this.newAccountJSON.remove("repassword");
+                this.newAccountJSON.remove("emailName");
+                this.newAccountJSON.remove("emailService");
+                this.newAccountJSON.remove("terms");
+                this.newAccountJSON.remove("status");
+                this.newAccountJSON.remove("message");
+
+                this.newAccountJSON.put("emailAddress", fullEmailAddress);
+
+                try {
+                    //Encrypt the password and the username.
+                    this.newAccountJSON.put("username", Encryption.SHA1Encryption(
+                            this.newAccountJSON.get("username").toString()));
+                    this.newAccountJSON.put("password", Encryption.SHA1Encryption(
+                            this.newAccountJSON.get("password").toString()));
+
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+
                 // Building Parameters
                 List<NameValuePair> parameters = new ArrayList<NameValuePair>();
                 parameters.add(new BasicNameValuePair("newAccountJSON", this.newAccountJSON.toString()));
+
+
 
                 /*
                  * On server it must be :
