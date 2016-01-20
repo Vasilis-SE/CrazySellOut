@@ -22,6 +22,8 @@ import codebrains.crazysellout.AsyncTasks.AttemptCreateAccount;
 import codebrains.crazysellout.Controllers.CreateAccountController;
 import codebrains.crazysellout.R;
 import codebrains.crazysellout.Adapters.Tabsadapter;
+import codebrains.crazysellout.System.Connectivity;
+import codebrains.crazysellout.System.SystemDialogs;
 
 public class MainActivity extends ActionBarActivity implements  android.support.v7.app.ActionBar.TabListener{
 
@@ -38,6 +40,8 @@ public class MainActivity extends ActionBarActivity implements  android.support.
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Connectivity.WifiEnabledCheck(this);
 
         tabsviewPager = (ViewPager) findViewById(R.id.tabspager);
         mTabsAdapter = new Tabsadapter(getSupportFragmentManager());
@@ -95,23 +99,6 @@ public class MainActivity extends ActionBarActivity implements  android.support.
 
     }
 
-    private void DisplayAlertBoxToUser(String title, String message){
-
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-        builder1.setTitle(title);
-        builder1.setMessage(message);
-        builder1.setCancelable(true);
-        builder1.setNeutralButton(android.R.string.ok,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-
-        AlertDialog alert11 = builder1.create();
-        alert11.show();
-    }
-
     /**
      * Method that prompts the terms and conditions alert dialog box.
      * @param view The view of the activity.
@@ -139,8 +126,7 @@ public class MainActivity extends ActionBarActivity implements  android.support.
             "The application will use user data given by you during the account creation (number, email etc) " +
             "in order to fulfill certain functionalities such as google maps location search.";
 
-        this.DisplayAlertBoxToUser(title, message);
-
+        SystemDialogs.DisplayInformationAlertBox(message, title, this);
     }
 
     /**
@@ -213,7 +199,7 @@ public class MainActivity extends ActionBarActivity implements  android.support.
             new AttemptCreateAccount(this, jObj).execute();
         }
         else{
-            this.DisplayAlertBoxToUser("Create Account Process", result);
+            SystemDialogs.DisplayInformationAlertBox(result, "Create Account Process", this);
         }
 
     }

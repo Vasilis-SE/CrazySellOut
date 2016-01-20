@@ -81,8 +81,6 @@ public class AttemptCreateAccount extends AsyncTask<String, String, String> {
                 List<NameValuePair> parameters = new ArrayList<NameValuePair>();
                 parameters.add(new BasicNameValuePair("newAccountJSON", this.newAccountJSON.toString()));
 
-
-
                 /*
                  * On server it must be :
                  * $jsonInput = $_POST['json'];
