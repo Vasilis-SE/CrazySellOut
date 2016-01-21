@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 
+import java.io.IOException;
+import java.net.InetAddress;
+
 import codebrains.crazysellout.Activities.MainActivity;
 
 /**
@@ -30,6 +33,26 @@ public class Connectivity {
             SystemDialogs.DisplayErrorAlertBox("Your wifi is not enabled!\nPlease turn your wifi on" +
                     " and re-open the application.", "Wifi not enabled", activityObj);
         }
+    }
+
+    /**
+     * Method that checks whether the server is reachable / available to the application.
+     *
+     * @param activityObj The object of the activity.
+     */
+    public static boolean RemoteServerIsReachable(Activity activityObj){
+
+        try {
+            if(!InetAddress.getByName("http://crazysellout.comule.com").isReachable(2000)){
+                SystemDialogs.DisplayInformationAlertBox("The server is not reachable at the moment.\n" +
+                        "Please try again later.", "Server Connection", activityObj);
+                return false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return true;
     }
 
 

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="codebrains.crazysellout" >
 
-    <!--  Internet Permissions -->
+    <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- Wifi Permissions -->
@@ -26,6 +26,8 @@
         <activity android:name=".Fragments.LoginFragment" >
         </activity>
         <activity android:name=".Fragments.CreatAccountFragment" >
+        </activity>
+        <activity android:name=".Activities.MainUserActivity" >
         </activity>
     </application>
 

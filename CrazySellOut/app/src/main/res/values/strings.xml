@@ -11,5 +11,6 @@
         <item>outlook.com</item>
         <item>outlook.gr</item>
     </string-array>
+    <string name="title_activity_main_user">MainUserActivity</string>
 
 </resources>

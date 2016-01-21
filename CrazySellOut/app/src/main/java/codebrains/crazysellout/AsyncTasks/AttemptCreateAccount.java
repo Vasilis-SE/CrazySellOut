@@ -14,6 +14,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import codebrains.crazysellout.Activities.MainActivity;
+import codebrains.crazysellout.System.Connectivity;
 import codebrains.crazysellout.System.JSONParser;
 import codebrains.crazysellout.System.Encryption;
 
@@ -87,14 +88,17 @@ public class AttemptCreateAccount extends AsyncTask<String, String, String> {
                  * json_decode($jsonInput);
                  */
 
-                // getting product details by making HTTP request
-                JSONObject json = this.jsonParser.makeHttpRequest("http://crazysellout.comule.com/test.php",
-                        "POST", parameters);
+                //Checking if the remote server is reachable by the application
+                if(Connectivity.RemoteServerIsReachable(this.mainActivity)) {
+
+                    // getting product details by making HTTP request
+                    JSONObject json = this.jsonParser.makeHttpRequest("http://crazysellout.comule.com/test.php",
+                            "POST", parameters);
 
 
-                if (json.get("success") == 1) {
+                    if (json.get("success") == 1) {
 
-                    return json.get("message").toString();
+                        return json.get("message").toString();
 
                     /*
                     Intent i = new Intent(Login.this, ReadComments.class);
@@ -102,9 +106,11 @@ public class AttemptCreateAccount extends AsyncTask<String, String, String> {
                     startActivity(i);
                     return json.getString(TAG_MESSAGE);
                     */
-                }else{
-                    return json.get("message").toString();
+                    } else {
+                        return json.get("message").toString();
+                    }
                 }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
