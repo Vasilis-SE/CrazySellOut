@@ -1,24 +1,15 @@
 package codebrains.crazysellout.Fragments;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import codebrains.crazysellout.R;
 
 public class CreatAccountFragment extends Fragment {

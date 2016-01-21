@@ -29,6 +29,14 @@
         </activity>
         <activity android:name=".Activities.MainUserActivity" >
         </activity>
+        <activity android:name=".Fragments.ProductsListFragment" >
+        </activity>
+        <activity android:name=".Fragments.UserFavoritesFragment" >
+        </activity>
+        <activity android:name=".Fragments.GoogleMapsFragment" >
+        </activity>
+        <activity android:name=".Fragments.ProductsListAvtivity" >
+        </activity>
     </application>
 
 </manifest>
