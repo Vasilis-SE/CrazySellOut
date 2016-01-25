@@ -2,6 +2,7 @@ package codebrains.crazysellout.AsyncTasks;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
@@ -78,10 +79,12 @@ public class AttemptCreateAccount extends AsyncTask<String, String, String> {
                     e.printStackTrace();
                 }
 
+
                 // Building Parameters
                 List<NameValuePair> parameters = new ArrayList<NameValuePair>();
                 parameters.add(new BasicNameValuePair("newAccountJSON", this.newAccountJSON.toString()));
 
+                Log.e("mainToPost", "mainToPost" + parameters.toString());
                 /*
                  * On server it must be :
                  * $jsonInput = $_POST['json'];
@@ -92,23 +95,12 @@ public class AttemptCreateAccount extends AsyncTask<String, String, String> {
                 if(Connectivity.RemoteServerIsReachable(this.mainActivity)) {
 
                     // getting product details by making HTTP request
-                    JSONObject json = this.jsonParser.makeHttpRequest("http://crazysellout.comule.com/test.php",
+                    JSONObject json = this.jsonParser.makeHttpRequest("http://crazysellout.comule.com/CreateAccount.php",
                             "POST", parameters);
 
 
-                    if (json.get("success") == 1) {
+                    return json.get("message").toString();
 
-                        return json.get("message").toString();
-
-                    /*
-                    Intent i = new Intent(Login.this, ReadComments.class);
-                    finish();
-                    startActivity(i);
-                    return json.getString(TAG_MESSAGE);
-                    */
-                    } else {
-                        return json.get("message").toString();
-                    }
                 }
 
             } catch (JSONException e) {

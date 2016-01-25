@@ -148,6 +148,9 @@ public class JSONParser {
             Log.e("Buffer Error", "Error converting result " + e.toString());
         }
 
+        json = ServerAnalytics.RemoveServerAnalyticsFromResponse(json);
+        Log.d("JSON Parser Error", json);
+
         // try parse the string to a JSON object
         try {
             jObj = new JSONObject(json);
