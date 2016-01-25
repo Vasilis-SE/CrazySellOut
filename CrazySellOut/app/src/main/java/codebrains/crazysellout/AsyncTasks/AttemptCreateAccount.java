@@ -79,28 +79,19 @@ public class AttemptCreateAccount extends AsyncTask<String, String, String> {
                     e.printStackTrace();
                 }
 
-
                 // Building Parameters
                 List<NameValuePair> parameters = new ArrayList<NameValuePair>();
                 parameters.add(new BasicNameValuePair("newAccountJSON", this.newAccountJSON.toString()));
 
-                Log.e("mainToPost", "mainToPost" + parameters.toString());
-                /*
-                 * On server it must be :
-                 * $jsonInput = $_POST['json'];
-                 * json_decode($jsonInput);
-                 */
-
                 //Checking if the remote server is reachable by the application
                 if(Connectivity.RemoteServerIsReachable(this.mainActivity)) {
 
-                    // getting product details by making HTTP request
+                    // Getting product details by making HTTP request
                     JSONObject json = this.jsonParser.makeHttpRequest("http://crazysellout.comule.com/CreateAccount.php",
                             "POST", parameters);
 
 
                     return json.get("message").toString();
-
                 }
 
             } catch (JSONException e) {
@@ -113,7 +104,7 @@ public class AttemptCreateAccount extends AsyncTask<String, String, String> {
         /**
          * Method that will be called when the background process is complete.
          *
-         * @param response
+         * @param response The response from the server that doInBackground method retrieved.
          */
         protected void onPostExecute(String response) {
 

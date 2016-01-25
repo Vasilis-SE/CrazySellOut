@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 import codebrains.crazysellout.AsyncTasks.AttemptCreateAccount;
 import codebrains.crazysellout.Controllers.CreateAccountController;
+import codebrains.crazysellout.Controllers.LoginController;
 import codebrains.crazysellout.R;
 import codebrains.crazysellout.Adapters.Tabsadapter;
 import codebrains.crazysellout.System.Connectivity;
@@ -202,8 +203,42 @@ public class MainActivity extends ActionBarActivity implements  android.support.
 
     }
 
+    /**
+     * Event for login button click.
+     *
+     * @param view The view of the form.
+     */
+    public void LoginProcess(View view){
 
+        //Get all the data from the new account form.
+        this.edtUsername = (EditText) findViewById(R.id.loginusername);
+        String username = this.edtUsername.getText().toString().trim();
 
+        this.edtPassword = (EditText) findViewById(R.id.loginpassword);
+        String password = this.edtPassword.getText().toString().trim();
+
+        JSONObject jObj = new JSONObject();
+        try {
+            jObj.put("username", username);
+            jObj.put("password", password);
+
+            //Key value pairs that will be used later during the check oc the new account.
+            jObj.put("status", true);
+            jObj.put("message", "");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        LoginController lic = new LoginController(jObj);
+        String result = lic.LoginControlMethod();
+        if(result.equals("")){
+            //TODO: here must do the async task call of the login process.
+        }
+        else{
+            SystemDialogs.DisplayInformationAlertBox(result, "Create Account Process", this);
+        }
+
+    }
 
 
 

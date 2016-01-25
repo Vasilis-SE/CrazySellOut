@@ -35,6 +35,12 @@ public class JSONParser {
 
     }
 
+    /**
+     * Method that retrieves a JSON string from a URL and converts it to JSON object.
+     *
+     * @param url The url in string form.
+     * @return Returns the JSON object that was the response from server.
+     */
     public JSONObject getJSONFromUrl(final String url) {
 
         // Making HTTP request
@@ -96,7 +102,15 @@ public class JSONParser {
         return jObj;
     }
 
-    // function get json from url by making HTTP POST or GET mehtod
+    /**
+     * Method that initializes an HTTP request with the given data, url and method, retrieves the
+     * response and converts it into JSON object.
+     *
+     * @param url The URL of the server.
+     * @param method The method type (GET or POST) for the data to be transmitted.
+     * @param params The data t be transmitted.
+     * @return Returns the JSON response of the server.
+     */
     public JSONObject makeHttpRequest(String url, String method, List<NameValuePair> params) {
 
         // Making HTTP request
@@ -148,8 +162,8 @@ public class JSONParser {
             Log.e("Buffer Error", "Error converting result " + e.toString());
         }
 
+        //Calls the analytics remover method to clean the response.
         json = ServerAnalytics.RemoveServerAnalyticsFromResponse(json);
-        Log.d("JSON Parser Error", json);
 
         // try parse the string to a JSON object
         try {
@@ -158,7 +172,6 @@ public class JSONParser {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
         }
 
-        // return JSON String
         return jObj;
     }
 

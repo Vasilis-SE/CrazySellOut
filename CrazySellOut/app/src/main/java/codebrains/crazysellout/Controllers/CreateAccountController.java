@@ -3,7 +3,7 @@ package codebrains.crazysellout.Controllers;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import codebrains.crazysellout.Models.CreateAccountModel;
+import codebrains.crazysellout.Models.AccountModel;
 
 /**
  * Created by Vasilhs on 1/9/2016.
@@ -25,7 +25,7 @@ public class CreateAccountController {
      */
     public String CreateNewAccountControlMethod(){
 
-        CreateAccountModel cam = new CreateAccountModel(this.newAccountJSON);
+        AccountModel cam = new AccountModel(this.newAccountJSON);
 
         cam.IsTermAndConditionsAgreed();
         cam.FieldEmpty();

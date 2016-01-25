@@ -8,12 +8,12 @@ import org.json.JSONObject;
 /**
  * Created by Vasilhs on 1/9/2016.
  */
-public class CreateAccountModel {
+public class AccountModel {
 
     private JSONObject newAccountJSON;
 
     //Constructor
-    public CreateAccountModel(JSONObject jObj){
+    public AccountModel(JSONObject jObj){
         this.newAccountJSON = jObj;
     }
 

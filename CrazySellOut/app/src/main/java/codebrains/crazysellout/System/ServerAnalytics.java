@@ -12,9 +12,10 @@ public class ServerAnalytics {
     }
 
     /**
+     * Method that removes the analytics characters from the php server response.
      *
-     * @param response
-     * @return
+     * @param response The response string message from the server.
+     * @return Returns a string with the analytics removed (the string is a JSON).
      */
     public static String RemoveServerAnalyticsFromResponse(String response){
 

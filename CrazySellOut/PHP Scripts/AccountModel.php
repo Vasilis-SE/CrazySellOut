@@ -50,7 +50,22 @@
 
 			return $response;
 		}
-	
+		
+		//Method that checks if the login account given exists.
+		public function LoginAccountExists(){
+			
+			$response = false;
+			$query = "SELECT * FROM users WHERE (username='".$this->username."' AND password='".$this->password."')";
+			$result = mysql_query($query);
+			
+			if(mysql_num_rows($result) == 1){
+				$response = true;
+			}
+			
+			return $response;
+			
+		}
+		
 	}
 
 
