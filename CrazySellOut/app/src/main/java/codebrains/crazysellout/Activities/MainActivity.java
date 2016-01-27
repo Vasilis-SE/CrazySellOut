@@ -17,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import codebrains.crazysellout.AsyncTasks.AttemptCreateAccount;
+import codebrains.crazysellout.AsyncTasks.AttemptLogin;
 import codebrains.crazysellout.Controllers.CreateAccountController;
 import codebrains.crazysellout.Controllers.LoginController;
 import codebrains.crazysellout.R;
@@ -232,7 +233,7 @@ public class MainActivity extends ActionBarActivity implements  android.support.
         LoginController lic = new LoginController(jObj);
         String result = lic.LoginControlMethod();
         if(result.equals("")){
-            //TODO: here must do the async task call of the login process.
+            new AttemptLogin(this, jObj).execute();
         }
         else{
             SystemDialogs.DisplayInformationAlertBox(result, "Create Account Process", this);

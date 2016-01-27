@@ -4,7 +4,7 @@
 
 	if(!empty($_POST)){
 		
-		$jsonObj = json_decode(stripslashes($_POST['newAccountJSON']));
+		$jsonObj = json_decode(stripslashes($_POST['loginJSON']));
 	
 		$username = md5($jsonObj->username);
 		$password = md5($jsonObj->password);
