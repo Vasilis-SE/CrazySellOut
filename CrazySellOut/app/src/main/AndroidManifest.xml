@@ -37,6 +37,12 @@
         </activity>
         <activity android:name=".Fragments.ProductsListAvtivity" >
         </activity>
+        <activity android:name=".Activities.MainProducerActivity" >
+        </activity>
+        <activity android:name=".Fragments.AddItemsFragment" >
+        </activity>
+        <activity android:name=".Fragments.ProducerItemsFragment" >
+        </activity>
     </application>
 
 </manifest>
