@@ -9,12 +9,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 
 import codebrains.crazysellout.Adapters.Tabsadapter;
+import codebrains.crazysellout.Adapters.UserTabsAdapter;
 import codebrains.crazysellout.R;
 
 public class MainUserActivity extends ActionBarActivity implements  android.support.v7.app.ActionBar.TabListener{
 
     private ViewPager tabsviewPager;
-    private Tabsadapter mTabsAdapter;
+    private UserTabsAdapter mTabsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class MainUserActivity extends ActionBarActivity implements  android.supp
         setContentView(R.layout.activity_main_user);
 
         tabsviewPager = (ViewPager) findViewById(R.id.tabspager);
-        mTabsAdapter = new Tabsadapter(getSupportFragmentManager());
+        mTabsAdapter = new UserTabsAdapter(getSupportFragmentManager());
         tabsviewPager.setAdapter(mTabsAdapter);
 
         this.getSupportActionBar().setHomeButtonEnabled(false);
