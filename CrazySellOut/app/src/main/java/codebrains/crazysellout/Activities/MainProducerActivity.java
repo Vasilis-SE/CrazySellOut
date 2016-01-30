@@ -1,13 +1,16 @@
 package codebrains.crazysellout.Activities;
 
+import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
+import android.view.View;
 
 import codebrains.crazysellout.Adapters.ProducerTabsAdapter;
+import codebrains.crazysellout.Fragments.AddItemsFragment;
 import codebrains.crazysellout.R;
+
 
 public class MainProducerActivity extends ActionBarActivity implements  android.support.v7.app.ActionBar.TabListener {
 
@@ -71,4 +74,15 @@ public class MainProducerActivity extends ActionBarActivity implements  android.
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
 
     }
+
+    /**
+     * Event click that occurs whenever the submit button on add new item freagment is clicked.
+     *
+     * @param view The view of the activity.
+     */
+    public void AddNewProductProcess(View view){
+        AddItemsFragment aif = new AddItemsFragment();
+        aif.AddNewProduct();
+    }
+
 }

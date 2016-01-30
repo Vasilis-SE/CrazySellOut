@@ -3,11 +3,7 @@ package codebrains.crazysellout.Adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-
 import codebrains.crazysellout.Fragments.AddItemsFragment;
-import codebrains.crazysellout.Fragments.CreatAccountFragment;
-import codebrains.crazysellout.Fragments.GoogleMapsFragment;
-import codebrains.crazysellout.Fragments.LoginFragment;
 import codebrains.crazysellout.Fragments.ProducerItemsFragment;
 import codebrains.crazysellout.Fragments.ProductsListAvtivity;
 

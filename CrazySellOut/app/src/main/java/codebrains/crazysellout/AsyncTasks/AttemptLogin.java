@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import codebrains.crazysellout.Activities.MainActivity;
+import codebrains.crazysellout.Activities.MainProducerActivity;
 import codebrains.crazysellout.Activities.MainUserActivity;
 import codebrains.crazysellout.System.Connectivity;
 import codebrains.crazysellout.System.Encryption;
@@ -92,7 +93,7 @@ public class AttemptLogin extends AsyncTask<String, String, String> {
                             i = new Intent(this.mainActivity, MainUserActivity.class);
                         break;
                         case "Producer":
-                            //TODO: to implement the opening of producer interface.
+                            i = new Intent(this.mainActivity, MainProducerActivity.class);
                         break;
 
                     }
