@@ -54,7 +54,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spinner2"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:spinnerMode="dropdown"
+            android:drawSelectorOnTop="true"
+            android:entries="@array/products"/>
 
         <TextView
             android:layout_width="wrap_content"

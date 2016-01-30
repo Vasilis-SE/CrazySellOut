@@ -11,6 +11,16 @@
         <item>outlook.com</item>
         <item>outlook.gr</item>
     </string-array>
+
+    <string-array name="products">
+        <item>Food</item>
+        <item>Cleaning</item>
+        <item>Beverage</item>
+        <item>Personal Care</item>
+        <item>Clothing</item>
+        <item>House Hold</item>
+        <item>Toys</item>
+    </string-array>
     <string name="title_activity_main_user">MainUserActivity</string>
 
 </resources>
