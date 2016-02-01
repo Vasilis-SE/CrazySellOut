@@ -139,7 +139,8 @@
                 android:layout_toRightOf="@+id/longtitudetextview"
                 android:layout_toEndOf="@+id/longtitudetextview"
                 android:layout_marginLeft="45dp"
-                android:layout_marginStart="45dp" />
+                android:layout_marginStart="45dp"
+                android:onClick="GetCoordinationsProcess"/>
 
         </RelativeLayout>
 

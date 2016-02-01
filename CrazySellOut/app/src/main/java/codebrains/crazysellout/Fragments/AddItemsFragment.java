@@ -1,6 +1,7 @@
 package codebrains.crazysellout.Fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,13 +13,17 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
 import codebrains.crazysellout.R;
+import codebrains.crazysellout.System.Coordinates;
+import codebrains.crazysellout.System.SystemDialogs;
 
 public class AddItemsFragment extends Fragment {
 
@@ -28,6 +33,7 @@ public class AddItemsFragment extends Fragment {
     private TextView longtitude, latitude, storeCity;
     private Spinner spinner;
     private DatePicker datePicker;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,7 +56,46 @@ public class AddItemsFragment extends Fragment {
         return view;
     }
 
-    public void AddNewProduct(){
+    public void GetCoordinationsProcess(Activity activity){
+
+        Coordinates coord = new Coordinates(activity);
+
+        if(coord.CanGetLocation()){
+            double lat = coord.GetLatitude();
+            double lon = coord.GetLongitude();
+            String city = coord.GetCityFromCoordinates();
+            Toast.makeText(activity, "Your Location is - \nLat: " + lat +
+                    "\nLong: " + lon + " And the city is : "+city, Toast.LENGTH_LONG).show();
+        }
+        else{
+            coord.ShowSettingsAlert();
+        }
+
+        coord.StopUsingGPS();
+
+        /*
+        try {
+
+            JSONObject jObj = coord.DeviceCoordinations();
+
+            if(jObj.get("status") == true){
+                this.longtitude.setText(jObj.get("longtitude").toString());
+                this.latitude.setText(jObj.get("latitude").toString());
+                this.storeCity.setText(jObj.get("city").toString());
+            }
+            else{
+                SystemDialogs.DisplayErrorAlertBox(jObj.get("message").toString(),
+                        "Coordination Error", activity);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        */
+
+    }
+
+    public void AddNewProductProcess(){
 
         String prodName = this.productName.getText().toString().trim();
         String storeName = this.storeName.getText().toString().trim();
@@ -64,7 +109,14 @@ public class AddItemsFragment extends Fragment {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String formatedDate = sdf.format(new Date(day, month, year));
 
+        String longtitude = this.longtitude.getText().toString();
+        String latitude = this.latitude.getText().toString();
+        String city = this.storeCity.getText().toString();
+
+        Log.d("Data : ", prodName+" "+storeName+" "+category+" "+prodPrice+" "+description+" "+
+                " "+formatedDate+" "+longtitude+" "+latitude+" "+city);
     }
+
 
     //Sub-class that extends the activity android class and initializes the spinner items.
     public class ActivitySubClass extends Activity {

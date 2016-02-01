@@ -16,11 +16,14 @@ public class MainProducerActivity extends ActionBarActivity implements  android.
 
     private ViewPager tabsviewPager;
     private ProducerTabsAdapter mTabsAdapter;
+    private AddItemsFragment aif;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_producer);
+
+        this.aif = new AddItemsFragment();
 
         tabsviewPager = (ViewPager) findViewById(R.id.tabspager);
         mTabsAdapter = new ProducerTabsAdapter(getSupportFragmentManager());
@@ -80,9 +83,13 @@ public class MainProducerActivity extends ActionBarActivity implements  android.
      *
      * @param view The view of the activity.
      */
+
     public void AddNewProductProcess(View view){
-        AddItemsFragment aif = new AddItemsFragment();
-        aif.AddNewProduct();
+        this.aif.AddNewProductProcess();
+    }
+
+    public void GetCoordinationsProcess(View view){
+        this.aif.GetCoordinationsProcess(this);
     }
 
 }
