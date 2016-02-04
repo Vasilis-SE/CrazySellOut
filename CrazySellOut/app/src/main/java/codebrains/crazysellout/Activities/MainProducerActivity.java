@@ -85,11 +85,11 @@ public class MainProducerActivity extends ActionBarActivity implements  android.
      */
 
     public void AddNewProductProcess(View view){
-        this.aif.AddNewProductProcess();
+        this.aif.AddNewProductProcess(this);
     }
 
-    public void GetCoordinationsProcess(View view){
-        this.aif.GetCoordinationsProcess(this);
+    public void GetCoordinatesProcess(View view){
+        this.aif.GetCoordinatesProcess(this);
     }
 
 }

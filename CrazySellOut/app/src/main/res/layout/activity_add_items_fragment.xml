@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Longtitude"
-                android:id="@+id/longtitudetextview"
+                android:id="@+id/longitudetv"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
@@ -124,8 +124,8 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Latitude"
-                android:id="@+id/latitudetextview"
-                android:layout_below="@+id/longtitudetextview"
+                android:id="@+id/latitudetv"
+                android:layout_below="@+id/longitudetv"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
@@ -135,12 +135,12 @@
                 android:layout_height="wrap_content"
                 android:text="Get Coordinations"
                 android:id="@+id/button3"
-                android:layout_alignBottom="@+id/latitudetextview"
-                android:layout_toRightOf="@+id/longtitudetextview"
-                android:layout_toEndOf="@+id/longtitudetextview"
+                android:layout_alignBottom="@+id/latitudetv"
+                android:layout_toRightOf="@+id/longitudetv"
+                android:layout_toEndOf="@+id/longitudetv"
                 android:layout_marginLeft="45dp"
                 android:layout_marginStart="45dp"
-                android:onClick="GetCoordinationsProcess"/>
+                android:onClick="GetCoordinatesProcess"/>
 
         </RelativeLayout>
 

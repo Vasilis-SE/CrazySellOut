@@ -1,7 +1,6 @@
 package codebrains.crazysellout.Fragments;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,26 +13,24 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import codebrains.crazysellout.R;
+import codebrains.crazysellout.System.Conversions;
 import codebrains.crazysellout.System.Coordinates;
-import codebrains.crazysellout.System.SystemDialogs;
+
 
 public class AddItemsFragment extends Fragment {
 
     private ActivitySubClass activitySubClass;
 
     private EditText productName, storeName, productPrice, productDiscription;
-    private TextView longtitude, latitude, storeCity;
+    private TextView longitude, latitude, storeCity;
     private Spinner spinner;
     private DatePicker datePicker;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,60 +39,62 @@ public class AddItemsFragment extends Fragment {
 
         this.activitySubClass = new ActivitySubClass();
 
-        //Initializing objects
-        this.productName = (EditText) view.findViewById(R.id.prodname);
-        this.storeName = (EditText) view.findViewById(R.id.storename);
-        this.productPrice = (EditText) view.findViewById(R.id.prodprice);
-        this.productDiscription = (EditText) view.findViewById(R.id.proddesc);
-        this.longtitude = (TextView) view.findViewById(R.id.longtitudetextview);
-        this.latitude = (TextView) view.findViewById(R.id.latitudetextview);
-        this.storeCity = (TextView) view.findViewById(R.id.storecitytextview);
-        this.spinner = (Spinner) view.findViewById(R.id.spinner2);
-        this.datePicker = (DatePicker) view.findViewById(R.id.datePicker);
-
         return view;
     }
 
-    public void GetCoordinationsProcess(Activity activity){
+    /**
+     * Method that enables the gps settings in order to retrieve the longitude, latitude and city
+     * name from coordinates. Then the results are displayed on the appropriate text views.
+     *
+     * @param activity The activity object of MainProducerActivity activity.
+     */
+    public void GetCoordinatesProcess(Activity activity){
 
-        Coordinates coord = new Coordinates(activity);
+        Coordinates gps = new Coordinates(activity);
+        this.longitude = (TextView) activity.findViewById(R.id.longitudetv);
+        this.latitude = (TextView) activity.findViewById(R.id.latitudetv);
+        this.storeCity = (TextView) activity.findViewById(R.id.storecitytextview);
 
-        if(coord.CanGetLocation()){
-            double lat = coord.GetLatitude();
-            double lon = coord.GetLongitude();
-            String city = coord.GetCityFromCoordinates();
+        if(gps.CanGetLocation()){
+
+            double lat = gps.GetLatitude();
+            double lon = gps.GetLongitude();
+            String city = gps.GetCityFromCoordinates();
+
             Toast.makeText(activity, "Your Location is - \nLat: " + lat +
                     "\nLong: " + lon + " And the city is : "+city, Toast.LENGTH_LONG).show();
+
+            this.longitude.setText(Conversions.ConvertDoubleToString(lon));
+            this.latitude.setText(Conversions.ConvertDoubleToString(lat));
+            this.storeCity.setText(city);
         }
         else{
-            coord.ShowSettingsAlert();
+            gps.ShowSettingsAlert();
         }
 
-        coord.StopUsingGPS();
-
-        /*
-        try {
-
-            JSONObject jObj = coord.DeviceCoordinations();
-
-            if(jObj.get("status") == true){
-                this.longtitude.setText(jObj.get("longtitude").toString());
-                this.latitude.setText(jObj.get("latitude").toString());
-                this.storeCity.setText(jObj.get("city").toString());
-            }
-            else{
-                SystemDialogs.DisplayErrorAlertBox(jObj.get("message").toString(),
-                        "Coordination Error", activity);
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        */
-
+        gps.StopUsingGPS();
     }
 
-    public void AddNewProductProcess(){
+    /**
+     * Method that handles the addition of a new product (check the values given by user and finally
+     * calling the server to update the server).
+     *
+     * @param activity The object of MainProducerActivity activity.
+     */
+    public void AddNewProductProcess(Activity activity){
+
+        //Initializing objects
+        this.productName = (EditText) activity.findViewById(R.id.prodname);
+        this.storeName = (EditText) activity.findViewById(R.id.storename);
+        this.productPrice = (EditText) activity.findViewById(R.id.prodprice);
+        this.productDiscription = (EditText) activity.findViewById(R.id.proddesc);
+
+        this.longitude = (TextView) activity.findViewById(R.id.longitudetv);
+        this.latitude = (TextView) activity.findViewById(R.id.latitudetv);
+        this.storeCity = (TextView) activity.findViewById(R.id.storecitytextview);
+
+        this.spinner = (Spinner) activity.findViewById(R.id.spinner2);
+        this.datePicker = (DatePicker) activity.findViewById(R.id.datePicker);
 
         String prodName = this.productName.getText().toString().trim();
         String storeName = this.storeName.getText().toString().trim();
@@ -103,18 +102,17 @@ public class AddItemsFragment extends Fragment {
         String prodPrice = this.productPrice.getText().toString().trim();
         String description = this.productDiscription.getText().toString().trim();
 
+        //The month field is added to it a +1 because the month starts counting from 0.
         int   day  = this.datePicker.getDayOfMonth();
-        int   month= this.datePicker.getMonth();
+        int   month= this.datePicker.getMonth()+1;
         int   year = this.datePicker.getYear();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        String formatedDate = sdf.format(new Date(day, month, year));
+        String date = day+"/"+month+"/"+year;
 
-        String longtitude = this.longtitude.getText().toString();
+        String longtitude = this.longitude.getText().toString();
         String latitude = this.latitude.getText().toString();
         String city = this.storeCity.getText().toString();
 
-        Log.d("Data : ", prodName+" "+storeName+" "+category+" "+prodPrice+" "+description+" "+
-                " "+formatedDate+" "+longtitude+" "+latitude+" "+city);
+
     }
 
 
@@ -123,9 +121,9 @@ public class AddItemsFragment extends Fragment {
 
         private Spinner spinner;
 
-        public void onCreate() {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
 
-            this.spinner = (Spinner) findViewById(R.id.spinner2);
             ArrayAdapter<String> adapter;
             List<String> list;
 
@@ -144,8 +142,6 @@ public class AddItemsFragment extends Fragment {
 
             spinner.setAdapter(adapter);
         }
-
-
 
     }
 
