@@ -1,5 +1,6 @@
 package codebrains.crazysellout.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -17,11 +18,16 @@ public class MainProducerActivity extends ActionBarActivity implements  android.
     private ViewPager tabsviewPager;
     private ProducerTabsAdapter mTabsAdapter;
     private AddItemsFragment aif;
+    private static String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_producer);
+
+        //Get the previous intent.
+        Intent myIntent = getIntent();
+        this.username = myIntent.getStringExtra("username");
 
         this.aif = new AddItemsFragment();
 
@@ -79,17 +85,20 @@ public class MainProducerActivity extends ActionBarActivity implements  android.
     }
 
     /**
-     * Event click that occurs whenever the submit button on add new item freagment is clicked.
+     * Event click that occurs whenever the submit button on add new item fragment is clicked.
      *
      * @param view The view of the activity.
      */
-
     public void AddNewProductProcess(View view){
         this.aif.AddNewProductProcess(this);
     }
 
     public void GetCoordinatesProcess(View view){
         this.aif.GetCoordinatesProcess(this);
+    }
+
+    public static String GetUsername(){
+        return username;
     }
 
 }

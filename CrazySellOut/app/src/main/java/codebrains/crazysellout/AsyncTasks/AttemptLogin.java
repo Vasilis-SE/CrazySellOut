@@ -91,9 +91,11 @@ public class AttemptLogin extends AsyncTask<String, String, String> {
                     switch(json.get("message").toString()){
                         case "Consumer":
                             i = new Intent(this.mainActivity, MainUserActivity.class);
+                            i.putExtra("username", this.newAccountJSON.get("username").toString());
                         break;
                         case "Producer":
                             i = new Intent(this.mainActivity, MainProducerActivity.class);
+                            i.putExtra("username", this.newAccountJSON.get("username").toString());
                         break;
 
                     }

@@ -13,14 +13,25 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import codebrains.crazysellout.AsyncTasks.AttemptAddProduct;
+import codebrains.crazysellout.Controllers.AddProductController;
 import codebrains.crazysellout.R;
 import codebrains.crazysellout.System.Conversions;
 import codebrains.crazysellout.System.Coordinates;
+import codebrains.crazysellout.System.JSONParser;
+import codebrains.crazysellout.System.SystemDialogs;
+
+import static codebrains.crazysellout.Activities.MainProducerActivity.GetUsername;
 
 
 public class AddItemsFragment extends Fragment {
@@ -112,6 +123,33 @@ public class AddItemsFragment extends Fragment {
         String latitude = this.latitude.getText().toString();
         String city = this.storeCity.getText().toString();
 
+        JSONObject jObj = new JSONObject();
+        try {
+            jObj.put("productName", prodName);
+            jObj.put("storeName", storeName);
+            jObj.put("category", category);
+            jObj.put("productPrice", prodPrice);
+            jObj.put("description", description);
+            jObj.put("date", date);
+            jObj.put("longitude", longtitude);
+            jObj.put("latitude", latitude);
+            jObj.put("city", city);
+            jObj.put("username", GetUsername());
+            jObj.put("status", true);
+            jObj.put("message", "");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        AddProductController apc = new AddProductController(jObj);
+        String result = apc.AddProductMainControl();
+
+        if(result.equals("")){
+            new AttemptAddProduct(activity, jObj).execute();
+        }
+        else{
+            SystemDialogs.DisplayInformationAlertBox(result, "Add Product Dialog", activity);
+        }
 
     }
 
