@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -53,20 +54,21 @@ public class AttemptAddProduct extends AsyncTask<String, String, String> {
 
         // Building Parameters
         List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-        parameters.add(new BasicNameValuePair("newAccountJSON", this.productJSON.toString()));
+        parameters.add(new BasicNameValuePair("addProductJSON", this.productJSON.toString()));
 
         //Checking if the remote server is reachable by the application
         if(Connectivity.RemoteServerIsReachable(this.mActivity)) {
 
-            //TODO: to initialize the method and the url of transfer.
-            /*
             // Getting product details by making HTTP request
-            JSONObject json = this.jsonParser.makeHttpRequest("http://crazysellout.comule.com/CreateAccount.php",
+            JSONObject json = this.jsonParser.makeHttpRequest("http://crazysellout.comule.com/AddProduct.php",
                     "POST", parameters);
 
-            return json.get("message").toString();   */
+            try {
+                return json.get("message").toString();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
-
 
         return null;
     }

@@ -130,7 +130,7 @@ public class AddItemsFragment extends Fragment {
             jObj.put("category", category);
             jObj.put("productPrice", prodPrice);
             jObj.put("description", description);
-            jObj.put("date", date);
+            jObj.put("expireDate", date);
             jObj.put("longitude", longtitude);
             jObj.put("latitude", latitude);
             jObj.put("city", city);
