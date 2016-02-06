@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import codebrains.crazysellout.Fragments.AddItemsFragment;
 import codebrains.crazysellout.Fragments.ProducerItemsFragment;
-import codebrains.crazysellout.Fragments.ProductsListAvtivity;
+import codebrains.crazysellout.Fragments.ProductsListActivity;
 
 /**
  * Created by Vasilhs on 1/29/2016.
@@ -30,7 +30,7 @@ public class ProducerTabsAdapter extends FragmentStatePagerAdapter {
                 return new ProducerItemsFragment();
 
             case 2:
-                return new ProductsListAvtivity();
+                return new ProductsListActivity();
 
         }
 

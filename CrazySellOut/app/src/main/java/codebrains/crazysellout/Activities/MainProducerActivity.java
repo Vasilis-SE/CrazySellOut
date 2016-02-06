@@ -7,7 +7,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
-
+import android.widget.ExpandableListView;
+import java.util.HashMap;
+import java.util.List;
+import codebrains.crazysellout.Adapters.ExpandableListAdapter;
 import codebrains.crazysellout.Adapters.ProducerTabsAdapter;
 import codebrains.crazysellout.Fragments.AddItemsFragment;
 import codebrains.crazysellout.R;
@@ -19,6 +22,11 @@ public class MainProducerActivity extends ActionBarActivity implements  android.
     private ProducerTabsAdapter mTabsAdapter;
     private AddItemsFragment aif;
     private static String username;
+
+    ExpandableListAdapter listAdapter;
+    ExpandableListView expListView;
+    List<String> listDataHeader;
+    HashMap<String, List<String>> listDataChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,5 +108,6 @@ public class MainProducerActivity extends ActionBarActivity implements  android.
     public static String GetUsername(){
         return username;
     }
+
 
 }
