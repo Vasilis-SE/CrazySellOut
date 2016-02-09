@@ -23,11 +23,6 @@ public class MainProducerActivity extends ActionBarActivity implements  android.
     private AddItemsFragment aif;
     private static String username;
 
-    ExpandableListAdapter listAdapter;
-    ExpandableListView expListView;
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

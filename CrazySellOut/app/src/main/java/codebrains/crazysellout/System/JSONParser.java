@@ -162,6 +162,8 @@ public class JSONParser {
             Log.e("Buffer Error", "Error converting result " + e.toString());
         }
 
+        Log.d("JSON Response - ", json);
+
         //Calls the analytics remover method to clean the response.
         json = ServerAnalytics.RemoveServerAnalyticsFromResponse(json);
 

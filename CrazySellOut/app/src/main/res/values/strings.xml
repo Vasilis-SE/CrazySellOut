@@ -20,7 +20,18 @@
         <item>Clothing</item>
         <item>House Hold</item>
         <item>Toys</item>
+        <item>Electronics</item>
+        <item>Tobacco</item>
     </string-array>
+
+    <string-array name="products_sorts">
+        <item>All</item>
+        <item>Product Name Sort</item>
+        <item>Product Category Sort</item>
+        <item>Store Name Sort</item>
+        <item>City Sort</item>
+    </string-array>
+
     <string name="title_activity_main_user">MainUserActivity</string>
 
 </resources>

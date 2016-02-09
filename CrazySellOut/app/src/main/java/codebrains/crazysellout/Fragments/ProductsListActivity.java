@@ -1,5 +1,6 @@
 package codebrains.crazysellout.Fragments;
 
+import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,22 +9,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import codebrains.crazysellout.Adapters.ExpandableListAdapter;
+import codebrains.crazysellout.AsyncTasks.AttemptDisplayProducts;
+import codebrains.crazysellout.Controllers.DisplayProductsController;
+import codebrains.crazysellout.Interfaces.IAsyncResponse;
 import codebrains.crazysellout.R;
+import codebrains.crazysellout.System.SystemDialogs;
 
-public class ProductsListActivity extends Fragment {
+public class ProductsListActivity extends Fragment implements IAsyncResponse{
 
-    View view;
+    private View view;
+    private AttemptDisplayProducts asyncTask;
+    private ExpandableListAdapter listAdapter;
+    private ExpandableListView expListView;
+    private HashMap<String, List<String>> listDataChild;
+    private List<String> listDataHeader;
 
-    ExpandableListAdapter listAdapter;
-    ExpandableListView expListView;
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
+    private JSONObject responseJSON;
 
+    //Constructor
     public ProductsListActivity() {
         // Required empty public constructor
     }
@@ -33,71 +43,63 @@ public class ProductsListActivity extends Fragment {
 
         this.view = inflater.inflate(R.layout.activity_products_list_avtivity, container, false);
 
-        Log.d("Inside Constructor - ", "OnCreateView");
-
         return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
 
         super.onActivityCreated(savedInstanceState);
+
+        JSONObject jObj = new JSONObject();
+        try {
+            jObj.put("sortcategory", "All");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        asyncTask = new AttemptDisplayProducts((Activity) view.getContext(), jObj);
+
+        //This to set delegate/listener back to this class
+        asyncTask.delegate = this;
+        asyncTask.execute();
 
         // get the listview
         expListView = (ExpandableListView) view.findViewById(R.id.lvExp);
 
-        // preparing list data
-        prepareListData();
-
-        listAdapter = new ExpandableListAdapter(view.getContext(), listDataHeader, listDataChild);
-
-        // setting list adapter
-        expListView.setAdapter(listAdapter);
-        Log.d("Inside Constructor - ", "onActivityCreated");
     }
 
-
-    /*
-     * Preparing the list data
+    /**
+     * Interface method that retrieves the results from the async task.
+     * @param output The result from the onPostExecute.
      */
-    private void prepareListData() {
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
+    @Override
+    public void ProcessFinish(String output) {
 
-        // Adding child data
-        listDataHeader.add("Top 250");
-        listDataHeader.add("Now Showing");
-        listDataHeader.add("Coming Soon..");
+        try {
 
-        // Adding child data
-        List<String> top250 = new ArrayList<String>();
-        top250.add("The Shawshank Redemption");
-        top250.add("The Godfather");
-        top250.add("The Godfather: Part II");
-        top250.add("Pulp Fiction");
-        top250.add("The Good, the Bad and the Ugly");
-        top250.add("The Dark Knight");
-        top250.add("12 Angry Men");
+            this.responseJSON = new JSONObject(output);
 
-        List<String> nowShowing = new ArrayList<String>();
-        nowShowing.add("The Conjuring");
-        nowShowing.add("Despicable Me 2");
-        nowShowing.add("Turbo");
-        nowShowing.add("Grown Ups 2");
-        nowShowing.add("Red 2");
-        nowShowing.add("The Wolverine");
+            if(this.responseJSON.get("status") == false){
+                SystemDialogs.DisplayInformationAlertBox(this.responseJSON.get("message").toString(),
+                        "Products Message", (Activity) view.getContext());
+            }
+            else{
+                DisplayProductsController dpc = new DisplayProductsController((JSONArray) this.responseJSON.get("message"));
+                this.listDataChild = dpc.GetListOfProducts();
+                this.listDataHeader = dpc.GetListOfHeaders();
 
-        List<String> comingSoon = new ArrayList<String>();
-        comingSoon.add("2 Guns");
-        comingSoon.add("The Smurfs 2");
-        comingSoon.add("The Spectacular Now");
-        comingSoon.add("The Canyons");
-        comingSoon.add("Europa Report");
+                listAdapter = new ExpandableListAdapter(view.getContext(), listDataHeader, listDataChild);
 
-        listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), nowShowing);
-        listDataChild.put(listDataHeader.get(2), comingSoon);
+                // setting list adapter
+                expListView.setAdapter(listAdapter);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 
