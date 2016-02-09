@@ -3,16 +3,13 @@ package codebrains.crazysellout.Fragments;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import codebrains.crazysellout.Adapters.ExpandableListAdapter;
@@ -99,6 +96,10 @@ public class ProductsListActivity extends Fragment implements IAsyncResponse{
             e.printStackTrace();
         }
 
+
+    }
+
+    public void SortProductsEvent(){
 
     }
 

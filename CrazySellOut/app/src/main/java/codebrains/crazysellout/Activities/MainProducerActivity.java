@@ -13,6 +13,8 @@ import java.util.List;
 import codebrains.crazysellout.Adapters.ExpandableListAdapter;
 import codebrains.crazysellout.Adapters.ProducerTabsAdapter;
 import codebrains.crazysellout.Fragments.AddItemsFragment;
+import codebrains.crazysellout.Fragments.ProductsListActivity;
+import codebrains.crazysellout.Models.ProductList;
 import codebrains.crazysellout.R;
 
 
@@ -22,6 +24,8 @@ public class MainProducerActivity extends ActionBarActivity implements  android.
     private ProducerTabsAdapter mTabsAdapter;
     private AddItemsFragment aif;
     private static String username;
+
+    private ProductsListActivity pla;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,7 @@ public class MainProducerActivity extends ActionBarActivity implements  android.
         this.username = myIntent.getStringExtra("username");
 
         this.aif = new AddItemsFragment();
+        this.pla = new ProductsListActivity();
 
         tabsviewPager = (ViewPager) findViewById(R.id.tabspager);
         mTabsAdapter = new ProducerTabsAdapter(getSupportFragmentManager());
@@ -104,5 +109,10 @@ public class MainProducerActivity extends ActionBarActivity implements  android.
         return username;
     }
 
+    public void SortProductsEvent(View view){
+
+
+        this.pla.SortProductsEvent();
+    }
 
 }

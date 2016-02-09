@@ -64,6 +64,158 @@
 			return $response;	
 		}
 		
+		//Method that creates a json object with all the product to be displayed in the app.
+		public function RetrieveAllProductsFromDatabase(){
+			
+			$query = "SELECT * FROM products";
+			$result = mysql_query($query);
+			
+			$response["status"] = true;
+			
+			if($result === false){
+				$response["status"] = false;
+				$response["message"] = "Something went wrong while trying to retrieve the data from database!
+					Please try again later, or contact with the support stuff.";
+				return $response;
+			}
+
+			if(mysql_num_rows($result) == 0){
+				$response["status"] = false;
+				$response["message"] = "No results found with the selected sorting method!";
+				return $response;
+			}
+			
+			$rows = array();
+			while($r = mysql_fetch_assoc($result)) {
+				$rows[] = $r;
+			}
+			$response["message"] = $rows;
+			
+			return $response;
+		}
+		
+		//Method that creates a json object with the products that have the same product name as the user typed.
+		public function RetrieveProductsSortedByProductName($prodName){
+			
+			$query = "SELECT * FROM products WHERE productName='".$prodName."'";
+			$result = mysql_query($query);
+			
+			$response["status"] = true;
+			
+			if($result === false){
+				$response["status"] = false;
+				$response["message"] = "Something went wrong while trying to retrieve the data from database!
+					Please try again later, or contact with the support stuff.";
+				return $response;
+			}
+
+			if(mysql_num_rows($result) == 0){
+				$response["status"] = false;
+				$response["message"] = "No results found with the selected sorting method!";
+				return $response;
+			}
+			
+			$rows = array();
+			while($r = mysql_fetch_assoc($result)) {
+				$rows[] = $r;
+			}
+			$response["message"] = $rows;
+			
+			return $response;
+		}
+		
+		//Method that creates a json object with the products that have the same product category as the user typed.
+		public function RetrieveProductsSortedByProductCategory($category){
+			
+			$query = "SELECT * FROM products WHERE category='".$category."'";
+			$result = mysql_query($query);
+			
+			$response["status"] = true;
+			
+			if($result === false){
+				$response["status"] = false;
+				$response["message"] = "Something went wrong while trying to retrieve the data from database!
+					Please try again later, or contact with the support stuff.";
+				return $response;
+			}
+
+			if(mysql_num_rows($result) == 0){
+				$response["status"] = false;
+				$response["message"] = "No results found with the selected sorting method!";
+				return $response;
+			}
+			
+			$rows = array();
+			while($r = mysql_fetch_assoc($result)) {
+				$rows[] = $r;
+			}
+			$response["message"] = $rows;
+			
+			return $response;
+			
+		}
+		
+		//Method that creates a json object with the products that have the same store name as the user typed.
+		public function RetrieveProductsSortedByStoreName($stName){
+			
+			$query = "SELECT * FROM products WHERE storeName='".$stName."'";
+			$result = mysql_query($query);
+			
+			$response["status"] = true;
+			
+			if($result === false){
+				$response["status"] = false;
+				$response["message"] = "Something went wrong while trying to retrieve the data from database!
+					Please try again later, or contact with the support stuff.";
+				return $response;
+			}
+
+			if(mysql_num_rows($result) == 0){
+				$response["status"] = false;
+				$response["message"] = "No results found with the selected sorting method!";
+				return $response;
+			}
+			
+			$rows = array();
+			while($r = mysql_fetch_assoc($result)) {
+				$rows[] = $r;
+			}
+			$response["message"] = $rows;
+			
+			return $response;
+			
+		}
+		
+		//Method that creates a json object with the products that have the same city as the user typed.
+		public function RetrieveProductsSortedByCity($city){
+			
+			$query = "SELECT * FROM products WHERE city='".$city."'";
+			$result = mysql_query($query);
+			
+			$response["status"] = true;
+			
+			if($result === false){
+				$response["status"] = false;
+				$response["message"] = "Something went wrong while trying to retrieve the data from database!
+					Please try again later, or contact with the support stuff.";
+				return $response;
+			}
+
+			if(mysql_num_rows($result) == 0){
+				$response["status"] = false;
+				$response["message"] = "No results found with the selected sorting method!";
+				return $response;
+			}
+			
+			$rows = array();
+			while($r = mysql_fetch_assoc($result)) {
+				$rows[] = $r;
+			}
+			$response["message"] = $rows;
+			
+			return $response;
+		}
+
 		
 		
 	}

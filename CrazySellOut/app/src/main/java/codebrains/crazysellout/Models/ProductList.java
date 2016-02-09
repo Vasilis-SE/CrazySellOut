@@ -20,6 +20,12 @@ public class ProductList {
         listDataHeader = new ArrayList<String>();
     }
 
+    /**
+     * Method that reads the array of product data and creates a hash map of data of the products and
+     * the headers of each item, that will be listed into the expandable list.
+     * @param jsonArray The array of product data in json format.
+     * @return Returns a hash map of the product data.
+     */
     public HashMap<String, List<String>> ListProductData(JSONArray jsonArray){
 
         HashMap<String, List<String>> listOfProducts = new HashMap<String, List<String>>();
@@ -43,7 +49,12 @@ public class ProductList {
         return listOfProducts;
     }
 
-
+    /**
+     * Method that is called from the ListProductData for every product and creates a list that contains
+     * the specific product data.
+     * @param jsonObject The json object that contains the product data.
+     * @return Returns a list that contain the product data.
+     */
     private List<String> GetProductChildData(JSONObject jsonObject){
 
         List<String> list = new ArrayList<String>();

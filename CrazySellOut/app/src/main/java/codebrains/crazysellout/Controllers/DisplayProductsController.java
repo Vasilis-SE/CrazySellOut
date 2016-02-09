@@ -25,6 +25,10 @@ public class DisplayProductsController {
         this.SetProductListDataForDisplay(jsonArray);
     }
 
+    /**
+     * Main control method for displaying the products to the user.
+     * @param jsonArray The array of product data in json format.
+     */
     private void SetProductListDataForDisplay(JSONArray jsonArray){
 
         ProductList pl = new ProductList();
