@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.Spinner;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +29,9 @@ public class ProductsListActivity extends Fragment implements IAsyncResponse{
     private ExpandableListView expListView;
     private HashMap<String, List<String>> listDataChild;
     private List<String> listDataHeader;
+
+    private EditText sortingEdtText;
+    private Spinner spinner;
 
     private JSONObject responseJSON;
 
@@ -99,7 +104,44 @@ public class ProductsListActivity extends Fragment implements IAsyncResponse{
 
     }
 
-    public void SortProductsEvent(){
+    /**
+     * Method that handles the sorting of the product with the given sort text by the user.
+     * @param activity The activity object of the parent class that called this method.
+     */
+    public void SortProductsEvent(View view, Activity activity){
+
+        this.view = view;
+        sortingEdtText = (EditText) activity.findViewById(R.id.editText);
+        spinner = (Spinner) activity.findViewById(R.id.spinner3);
+
+        String sortingText = sortingEdtText.getText().toString().trim();
+        String sortingCategory = spinner.getSelectedItem().toString();
+
+        JSONObject jObj = new JSONObject();
+        try {
+            jObj.put("sortcategory", sortingCategory);
+            jObj.put("sortingText", sortingText);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        if(sortingText.equals("") && !sortingCategory.equals("All")){
+
+            SystemDialogs.DisplayInformationAlertBox("The sorting text field is empty! Please fill " +
+                    "the specific field in order to sort the result with the parameter that you have " +
+                    "given.", "Sorting Error", activity);
+        }
+        else {
+
+            asyncTask = new AttemptDisplayProducts(activity, jObj);
+
+            //This to set delegate/listener back to this class
+            asyncTask.delegate = this;
+            asyncTask.execute();
+
+            // get the listview
+            expListView = (ExpandableListView) activity.findViewById(R.id.lvExp);
+        }
 
     }
 

@@ -110,9 +110,7 @@ public class MainProducerActivity extends ActionBarActivity implements  android.
     }
 
     public void SortProductsEvent(View view){
-
-
-        this.pla.SortProductsEvent();
+        this.pla.SortProductsEvent(view, this);
     }
 
 }

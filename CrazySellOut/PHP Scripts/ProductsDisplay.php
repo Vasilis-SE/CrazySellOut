@@ -12,19 +12,19 @@
 			die(json_encode($result));
 		}
 		else if($jsonObj->sortcategory == 'Product Name Sort'){
-			$result = $productObj->RetrieveProductsSortedByProductName();
+			$result = $productObj->RetrieveProductsSortedByProductName($jsonObj->sortingText);
 			die(json_encode($result));			
 		}
 		else if($jsonObj->sortcategory == 'Product Category Sort'){
-			$result = $productObj->RetrieveProductsSortedByProductCategory();
+			$result = $productObj->RetrieveProductsSortedByProductCategory($jsonObj->sortingText);
 			die(json_encode($result));
 		}
 		else if($jsonObj->sortcategory == 'Store Name Sort'){
-			$result = $productObj->RetrieveProductsSortedByStoreName();
+			$result = $productObj->RetrieveProductsSortedByStoreName($jsonObj->sortingText);
 			die(json_encode($result));
 		}
 		else if($jsonObj->sortcategory == 'City Sort'){
-			$result = $productObj->RetrieveProductsSortedByCity();
+			$result = $productObj->RetrieveProductsSortedByCity($jsonObj->sortingText);
 			die(json_encode($result));
 		}
 
