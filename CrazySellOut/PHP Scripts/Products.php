@@ -215,6 +215,36 @@
 			
 			return $response;
 		}
+		
+		//Method that retrieves all the products that the specific producer has submitted.
+		public function RetrieveAllProductFromSpecificProducer($username){
+			
+			$query = "SELECT * FROM products WHERE username='".$username."'";
+			$result = mysql_query($query);
+			
+			$response["status"] = true;
+			
+			if($result === false){
+				$response["status"] = false;
+				$response["message"] = "Something went wrong while trying to retrieve the data from database!
+					Please try again later, or contact with the support stuff.";
+				return $response;
+			}
+
+			if(mysql_num_rows($result) == 0){
+				$response["status"] = false;
+				$response["message"] = "There are no product submitted by your account!";
+				return $response;
+			}
+			
+			$rows = array();
+			while($r = mysql_fetch_assoc($result)) {
+				$rows[] = $r;
+			}
+			$response["message"] = $rows;
+			
+			return $response;
+		}
 
 		
 		

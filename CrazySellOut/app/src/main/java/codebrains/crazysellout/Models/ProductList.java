@@ -1,9 +1,12 @@
 package codebrains.crazysellout.Models;
 
+import android.text.Html;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,6 +73,30 @@ public class ProductList {
 
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    /**
+     * Method that constructs a list of product items from a specific producer.
+     * @param jsonArray The response array of product from server.
+     * @return Returns a list of string data, each one is a product item.
+     * @throws JSONException Exception that occurs whenever the something goes wrong with the JSON data.
+     */
+    public ArrayList<String> GetUserProducts(JSONArray jsonArray) throws JSONException{
+
+        ArrayList<String> list = new ArrayList<String>();
+        for(int i=0; i < jsonArray.length(); i++){
+
+            JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+            String value = "<b>Product Name :</b>" + jsonObject.get("productName") +
+                    "\n<b>Price :</b>" + jsonObject.get("price") + "\n<b>Expire Date :</b>" + jsonObject.get("expireDate");
+
+            //Format the above string to html, so it can show show the bold text.
+            Html.fromHtml(value);
+
+            list.add(value);
         }
 
         return list;

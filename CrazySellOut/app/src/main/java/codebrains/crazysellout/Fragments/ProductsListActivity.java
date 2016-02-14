@@ -87,7 +87,8 @@ public class ProductsListActivity extends Fragment implements IAsyncResponse{
                         "Products Message", (Activity) view.getContext());
             }
             else{
-                DisplayProductsController dpc = new DisplayProductsController((JSONArray) this.responseJSON.get("message"));
+                DisplayProductsController dpc = new DisplayProductsController();
+                dpc.SetProductListDataForDisplay((JSONArray) this.responseJSON.get("message"));
                 this.listDataChild = dpc.GetListOfProducts();
                 this.listDataHeader = dpc.GetListOfHeaders();
 

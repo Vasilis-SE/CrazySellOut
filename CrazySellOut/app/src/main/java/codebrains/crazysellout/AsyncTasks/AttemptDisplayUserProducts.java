@@ -3,31 +3,35 @@ package codebrains.crazysellout.AsyncTasks;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import codebrains.crazysellout.Fragments.ProducerItemsFragment;
 import codebrains.crazysellout.Interfaces.IAsyncResponse;
 import codebrains.crazysellout.System.Connectivity;
 import codebrains.crazysellout.System.JSONParser;
 
 /**
- * Created by Vasilhs on 2/8/2016.
+ * Created by Vasilhs on 2/11/2016.
  */
-public class AttemptDisplayProducts extends AsyncTask<String, String, String> {
+public class AttemptDisplayUserProducts extends AsyncTask<String, String, String> {
 
     private ProgressDialog pDialog;
     private Activity mActivity;
-    private JSONObject dispJSON;
     private JSONParser jsonParser;
+    private JSONObject userProductJSON;
 
     public IAsyncResponse delegate = null;
 
     //Constructor
-    public AttemptDisplayProducts(Activity act, JSONObject jObj){
+    public AttemptDisplayUserProducts(Activity act, JSONObject jObj){
         this.mActivity = act;
-        this.dispJSON = jObj;
+        this.userProductJSON = jObj;
         this.jsonParser = new JSONParser();
     }
 
@@ -48,16 +52,14 @@ public class AttemptDisplayProducts extends AsyncTask<String, String, String> {
 
         // Building Parameters
         List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-        parameters.add(new BasicNameValuePair("displayProdJSON", this.dispJSON.toString()));
+        parameters.add(new BasicNameValuePair("producerItemsJSON", this.userProductJSON.toString()));
 
         //Checking if the remote server is reachable by the application
         if(Connectivity.RemoteServerIsReachable(this.mActivity)) {
 
             // Getting product details by making HTTP request
-            JSONObject json = this.jsonParser.makeHttpRequest("http://crazysellout.comule.com/ProductsDisplay.php",
+            JSONObject json = this.jsonParser.makeHttpRequest("http://crazysellout.comule.com/ProducerItems.php",
                     "POST", parameters);
-
-
 
             return json.toString();
 
@@ -75,7 +77,6 @@ public class AttemptDisplayProducts extends AsyncTask<String, String, String> {
 
         //Sets as an output to the interface the response of the server.
         delegate.ProcessFinish(response);
-
         pDialog.dismiss();
 
     }
