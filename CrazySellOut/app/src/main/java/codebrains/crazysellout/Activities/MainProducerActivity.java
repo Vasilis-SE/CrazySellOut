@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import java.util.HashMap;
 import java.util.List;
@@ -78,6 +79,7 @@ public class MainProducerActivity extends ActionBarActivity implements  android.
 
             }
         });
+
     }
 
     @Override

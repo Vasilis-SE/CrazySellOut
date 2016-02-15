@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:id="@+id/scrollView"
+android:layout_alignParentTop="true"
+android:layout_alignParentLeft="true"
+android:layout_alignParentStart="true"
+android:layout_alignParentRight="true"
+android:layout_alignParentEnd="true"
+android:layout_alignParentBottom="true">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Product Name :"
+        android:id="@+id/textView11" />
+
+    <EditText
+        android:layout_width="302dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/prodname" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Store Name :"
+        android:id="@+id/textView12"
+        android:layout_marginTop="15px"/>
+
+    <EditText
+        android:layout_width="302dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/storename" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Product Category :"
+        android:id="@+id/textView13"
+        android:layout_marginTop="15px"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner2"
+        android:layout_gravity="center_horizontal"
+        android:spinnerMode="dropdown"
+        android:drawSelectorOnTop="true"
+        android:entries="@array/products"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Price :"
+        android:id="@+id/textView14"
+        android:layout_marginTop="15px"/>
+
+    <EditText
+        android:layout_width="302dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/prodprice" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Description :"
+        android:id="@+id/textView15"
+        android:layout_marginTop="15px"/>
+
+    <EditText
+        android:layout_width="302dp"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/proddesc" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Expire Date :"
+        android:id="@+id/textView16"
+        android:layout_marginTop="15px"/>
+
+    <DatePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/datePicker"
+        android:layout_marginLeft="20px"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginTop="20px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Longitude"
+            android:id="@+id/longitudetv"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="15px"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Latitude"
+            android:id="@+id/latitudetv"
+            android:layout_below="@+id/longitudetv"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get Coordinates"
+            android:id="@+id/button3"
+            android:layout_alignBottom="@+id/latitudetv"
+            android:layout_toRightOf="@+id/longitudetv"
+            android:layout_toEndOf="@+id/longitudetv"
+            android:layout_marginLeft="45dp"
+            android:layout_marginStart="45dp"
+            android:onClick="GetCoordinatesProcess"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Store City"
+        android:id="@+id/storecitytextview"
+        android:layout_below="@+id/latitudetextview"
+        android:layout_toRightOf="@+id/latitudetextview"
+        android:layout_toEndOf="@+id/latitudetextview" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:id="@+id/updateBtn" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:id="@+id/dltBtn"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+</LinearLayout>
+
+</ScrollView>

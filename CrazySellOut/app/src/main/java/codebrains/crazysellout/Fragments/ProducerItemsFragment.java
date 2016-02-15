@@ -3,13 +3,14 @@ package codebrains.crazysellout.Fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import codebrains.crazysellout.Interfaces.IAsyncResponse;
 import codebrains.crazysellout.R;
 
 
-public class ProducerItemsFragment extends Fragment implements IAsyncResponse{
+public class ProducerItemsFragment extends Fragment implements IAsyncResponse {
 
     private ListView listView;
     private View view;
@@ -41,7 +42,7 @@ public class ProducerItemsFragment extends Fragment implements IAsyncResponse{
 
         this.listView = (ListView) this.view.findViewById(R.id.listView);
 
-        JSONObject jsonObject = new JSONObject();
+        final JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("username", MainProducerActivity.GetUsername());
         } catch (JSONException e) {
@@ -51,6 +52,26 @@ public class ProducerItemsFragment extends Fragment implements IAsyncResponse{
         asyncTask = new AttemptDisplayUserProducts((Activity) this.view.getContext(), jsonObject);
         asyncTask.delegate = this;
         asyncTask.execute();
+
+        //List view click item listener.
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                try {
+                    JSONObject jsonObject1 = new JSONObject(response);
+                    JSONArray jsonArray = (JSONArray) jsonObject1.get("message");
+                    JSONObject selectedItemJSON = (JSONObject) jsonArray.get(position);
+
+                    //TODO : must call the update / delete activity through intent.
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
 
         return view;
     }
@@ -72,7 +93,7 @@ public class ProducerItemsFragment extends Fragment implements IAsyncResponse{
         ArrayList<String> list = dpc.SetListOfUserProductsForDisplay(response, activity);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.simpe_list_row_item, list);
-        
+
         if(listView == null)
             listView = (ListView) activity.findViewById(R.id.listView);
 
@@ -110,4 +131,5 @@ public class ProducerItemsFragment extends Fragment implements IAsyncResponse{
         response = output;
         this.ProcessOutput(response, activity);
     }
+
 }

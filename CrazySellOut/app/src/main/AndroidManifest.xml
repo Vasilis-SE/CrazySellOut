@@ -46,6 +46,10 @@
         </activity>
         <activity android:name=".Fragments.ProducerItemsFragment" >
         </activity>
+        <activity android:name=".Activities.ProductCostumization" >
+        </activity>
+        <activity android:name=".Activities.ProductCustomizationActivity" >
+        </activity>
     </application>
 
 </manifest>
