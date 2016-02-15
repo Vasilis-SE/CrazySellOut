@@ -12,10 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 import codebrains.crazysellout.Activities.MainProducerActivity;
 import codebrains.crazysellout.AsyncTasks.AttemptDisplayUserProducts;
 import codebrains.crazysellout.Controllers.DisplayProductsController;
@@ -69,26 +66,48 @@ public class ProducerItemsFragment extends Fragment implements IAsyncResponse{
      * the activity.
      * @param response The string response of the server.
      */
-    private void ProcessOutput(String response){
+    private void ProcessOutput(String response, Activity activity){
 
         DisplayProductsController dpc = new DisplayProductsController();
-        ArrayList<String> list = dpc.SetListOfUserProductsForDisplay(response, (Activity) this.view.getContext());
+        ArrayList<String> list = dpc.SetListOfUserProductsForDisplay(response, activity);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), R.layout.simpe_list_row_item, list);
-        Html.fromHtml(adapter.toString());
-        this.listView.setAdapter(adapter);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.simpe_list_row_item, list);
+        
+        if(listView == null)
+            listView = (ListView) activity.findViewById(R.id.listView);
+
+        listView.setAdapter(adapter);
 
     }
 
-    public void SetResponseFromServer(String response){
-        this.response = response;
+    /**
+     * Method that handles the refresh of product items into the list of products.
+     * @param view The view created by the event onClick.
+     */
+    public void RefreshProducerItemsListProcess(View view){
+
+        /*
+        this.view = view;
+        listView = (ListView) this.view.findViewById(R.id.listView);
+        */
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("username", MainProducerActivity.GetUsername());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        asyncTask = new AttemptDisplayUserProducts((Activity) view.getContext(), jsonObject);
+        asyncTask.delegate = this;
+        asyncTask.execute();
     }
 
 
     @Override
-    public void ProcessFinish(String output) {
+    public void ProcessFinish(String output, Activity activity) {
 
         response = output;
-        this.ProcessOutput(response);
+        this.ProcessOutput(response, activity);
     }
 }

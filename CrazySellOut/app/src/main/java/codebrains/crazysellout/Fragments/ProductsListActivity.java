@@ -33,7 +33,7 @@ public class ProductsListActivity extends Fragment implements IAsyncResponse{
     private EditText sortingEdtText;
     private Spinner spinner;
 
-    private JSONObject responseJSON;
+    private String response;
 
     //Constructor
     public ProductsListActivity() {
@@ -45,13 +45,8 @@ public class ProductsListActivity extends Fragment implements IAsyncResponse{
 
         this.view = inflater.inflate(R.layout.activity_products_list_avtivity, container, false);
 
-        return view;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-
-        super.onActivityCreated(savedInstanceState);
+        // get the listview
+        expListView = (ExpandableListView) view.findViewById(R.id.lvExp);
 
         JSONObject jObj = new JSONObject();
         try {
@@ -66,29 +61,31 @@ public class ProductsListActivity extends Fragment implements IAsyncResponse{
         asyncTask.delegate = this;
         asyncTask.execute();
 
-        // get the listview
-        expListView = (ExpandableListView) view.findViewById(R.id.lvExp);
+        return view;
+    }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+
+        super.onActivityCreated(savedInstanceState);
     }
 
     /**
-     * Interface method that retrieves the results from the async task.
-     * @param output The result from the onPostExecute.
+     * Method that handles the display of the product items into the expandable list.
+     * @param response The response string from the server.
      */
-    @Override
-    public void ProcessFinish(String output) {
+    private void ProcessOutput(String response){
 
         try {
+            JSONObject responseJSON = new JSONObject(response);
 
-            this.responseJSON = new JSONObject(output);
-
-            if(this.responseJSON.get("status") == false){
-                SystemDialogs.DisplayInformationAlertBox(this.responseJSON.get("message").toString(),
+            if(responseJSON.get("status") == false){
+                SystemDialogs.DisplayInformationAlertBox(responseJSON.get("message").toString(),
                         "Products Message", (Activity) view.getContext());
             }
             else{
                 DisplayProductsController dpc = new DisplayProductsController();
-                dpc.SetProductListDataForDisplay((JSONArray) this.responseJSON.get("message"));
+                dpc.SetProductListDataForDisplay((JSONArray) responseJSON.get("message"));
                 this.listDataChild = dpc.GetListOfProducts();
                 this.listDataHeader = dpc.GetListOfHeaders();
 
@@ -101,8 +98,17 @@ public class ProductsListActivity extends Fragment implements IAsyncResponse{
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
 
+    /**
+     * Interface method that retrieves the results from the async task.
+     * @param output The result from the onPostExecute.
+     */
+    @Override
+    public void ProcessFinish(String output, Activity activity) {
 
+        response = output;
+        this.ProcessOutput(response);
     }
 
     /**

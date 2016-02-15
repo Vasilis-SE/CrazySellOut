@@ -74,7 +74,7 @@ public class AttemptDisplayProducts extends AsyncTask<String, String, String> {
     public void onPostExecute(String response) {
 
         //Sets as an output to the interface the response of the server.
-        delegate.ProcessFinish(response);
+        delegate.ProcessFinish(response, mActivity);
 
         pDialog.dismiss();
 

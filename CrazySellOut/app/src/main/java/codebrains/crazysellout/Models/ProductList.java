@@ -1,6 +1,9 @@
 package codebrains.crazysellout.Models;
 
+import android.graphics.Typeface;
 import android.text.Html;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -87,14 +90,12 @@ public class ProductList {
     public ArrayList<String> GetUserProducts(JSONArray jsonArray) throws JSONException{
 
         ArrayList<String> list = new ArrayList<String>();
+
         for(int i=0; i < jsonArray.length(); i++){
 
             JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-            String value = "<b>Product Name :</b>" + jsonObject.get("productName") +
-                    "\n<b>Price :</b>" + jsonObject.get("price") + "\n<b>Expire Date :</b>" + jsonObject.get("expireDate");
-
-            //Format the above string to html, so it can show show the bold text.
-            Html.fromHtml(value);
+            String value = "Product Name : " + jsonObject.get("productName") + "\nPrice : " +
+                    jsonObject.get("price") + "\nExpire Date : " + jsonObject.get("expireDate");
 
             list.add(value);
         }
