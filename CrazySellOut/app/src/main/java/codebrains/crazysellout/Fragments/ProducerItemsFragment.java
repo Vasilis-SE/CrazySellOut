@@ -1,6 +1,7 @@
 package codebrains.crazysellout.Fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import codebrains.crazysellout.Activities.MainProducerActivity;
+import codebrains.crazysellout.Activities.ProductCustomizationActivity;
 import codebrains.crazysellout.AsyncTasks.AttemptDisplayUserProducts;
 import codebrains.crazysellout.Controllers.DisplayProductsController;
 import codebrains.crazysellout.Interfaces.IAsyncResponse;
@@ -63,7 +65,9 @@ public class ProducerItemsFragment extends Fragment implements IAsyncResponse {
                     JSONArray jsonArray = (JSONArray) jsonObject1.get("message");
                     JSONObject selectedItemJSON = (JSONObject) jsonArray.get(position);
 
-                    //TODO : must call the update / delete activity through intent.
+                    Intent myIntent = new Intent(view.getContext(), ProductCustomizationActivity.class);
+                    myIntent.putExtra("selectedItem", String.valueOf(selectedItemJSON));
+                    startActivity(myIntent);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
