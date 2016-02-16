@@ -245,6 +245,13 @@
 			
 			return $response;
 		}
+		
+		//Method that handles the update of products into the database.
+		public function UpdateProduct(){
+		
+			$query = "UPDATE products SET "
+		
+		}
 
 		
 		
