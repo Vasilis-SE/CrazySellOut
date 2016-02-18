@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="8dp" >
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/lblListHeader"
+            android:layout_width="170sp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+            android:textSize="20dp"
+            android:textColor="#000" />
+
+        <Button
+            android:layout_width="64px"
+            android:layout_height="64px"
+            android:id="@+id/button7"
+            android:background="@drawable/favorites_icon"
+            android:focusable="false" />
+
+    </LinearLayout>
+
+</LinearLayout>

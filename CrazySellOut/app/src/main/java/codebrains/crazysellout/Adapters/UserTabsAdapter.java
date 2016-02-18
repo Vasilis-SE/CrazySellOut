@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import codebrains.crazysellout.Fragments.GoogleMapsFragment;
-import codebrains.crazysellout.Fragments.ProductsListActivity;
 import codebrains.crazysellout.Fragments.UserFavoritesFragment;
+import codebrains.crazysellout.Fragments.UserProductListFragment;
 
 
 /**
@@ -25,8 +25,7 @@ public class UserTabsAdapter extends FragmentStatePagerAdapter{
         // TODO Auto-generated method stub
         switch (index) {
             case 0:
-                return new ProductsListActivity();
-
+                return new UserProductListFragment();
             case 1:
                 return new UserFavoritesFragment();
 

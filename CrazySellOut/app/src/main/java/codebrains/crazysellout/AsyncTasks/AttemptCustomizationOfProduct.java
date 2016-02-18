@@ -87,5 +87,5 @@ public class AttemptCustomizationOfProduct extends AsyncTask<String, String, Str
         Toast.makeText(this.mActivity, response, Toast.LENGTH_LONG).show();
 
     }
-    
+
 }

@@ -50,6 +50,10 @@
         </activity>
         <activity android:name=".Activities.ProductCustomizationActivity" >
         </activity>
+        <activity android:name=".Fragments.UserProductsListActivity" >
+        </activity>
+        <activity android:name=".Fragments.UserProductListFragment" >
+        </activity>
     </application>
 
 </manifest>
