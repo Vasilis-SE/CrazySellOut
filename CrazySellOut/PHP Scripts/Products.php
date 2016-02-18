@@ -247,10 +247,45 @@
 		}
 		
 		//Method that handles the update of products into the database.
-		public function UpdateProduct(){
+		public function UpdateProduct($id){
 		
-			$query = "UPDATE products SET "
+			$query = "UPDATE products SET productName='".$productName."', storeName='".$storeName."', 
+				category='".$category."', price='".$price."', description='".$description."', 
+				expireDate='".$expireDate."', longitude='".$longitude."', latitude='".$latitude."', city='".$city."' 
+				WHERE id='".$id."' AND username='".$username."' ";
+			$result = mysql_query($query);
+			
+			if($result === false){
+				$response["status"] = false;
+				$response["message"] = "Something went wrong while trying to update the data to database!
+					Please try again later, or contact the support stuff.";
+				return $response;
+			}
+			
+			$response["status"] = true;
+			$response["message"] = "Data have been updated successfully!";
+			return $response;
+			
+		}
 		
+		//Method that handles the deletion of a product.
+		public function DeleteProduct($id){
+			
+			$query = "DELETE FROM products WHERE id='".$id."' AND username='".$username."' 
+				AND productName='".$productName."' AND storeName='".$storeName."' AND category='".$category."'";
+			$result = mysql_query($query);
+			
+			if($result === false){
+				$response["status"] = false;
+				$response["message"] = "Something went wrong while trying to delete the product from database!
+					Please try again later, or contact the support stuff.";
+				return $response;
+			}
+			
+			$response["status"] = true;
+			$response["message"] = "Data have been deleted successfully!";
+			return $response;
+			
 		}
 
 		

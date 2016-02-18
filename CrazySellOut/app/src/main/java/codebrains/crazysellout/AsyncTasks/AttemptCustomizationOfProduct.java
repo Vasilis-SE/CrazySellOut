@@ -10,23 +10,15 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-
-import codebrains.crazysellout.Activities.MainActivity;
-import codebrains.crazysellout.Activities.MainProducerActivity;
-import codebrains.crazysellout.Activities.MainUserActivity;
 import codebrains.crazysellout.System.Connectivity;
-import codebrains.crazysellout.System.Encryption;
 import codebrains.crazysellout.System.JSONParser;
 
 /**
  * Created by Vasilhs on 2/16/2016.
  */
-public class AttemptCostumizationOfProduct extends AsyncTask<String, String, String> {
+public class AttemptCustomizationOfProduct extends AsyncTask<String, String, String> {
 
     private ProgressDialog pDialog;
     private Activity mActivity;
@@ -34,7 +26,7 @@ public class AttemptCostumizationOfProduct extends AsyncTask<String, String, Str
     private JSONParser jsonParser;
 
     //Constructor
-    public AttemptCostumizationOfProduct(Activity act, JSONObject jObj){
+    public AttemptCustomizationOfProduct(Activity act, JSONObject jObj){
         this.mActivity = act;
         this.productJSON = jObj;
         this.jsonParser = new JSONParser();
@@ -67,13 +59,11 @@ public class AttemptCostumizationOfProduct extends AsyncTask<String, String, Str
             if(Connectivity.RemoteServerIsReachable(this.mActivity)) {
 
                 // Getting product details by making HTTP request
-                JSONObject json = this.jsonParser.makeHttpRequest("http://crazysellout.comule.com/LoginAccount.php",
+                JSONObject json = this.jsonParser.makeHttpRequest("http://crazysellout.comule.com/CustomizeProducts.php",
                         "POST", parameters);
 
 
                 return json.get("message").toString();
-
-
             }
 
         } catch (JSONException e) {
@@ -94,10 +84,8 @@ public class AttemptCostumizationOfProduct extends AsyncTask<String, String, Str
         pDialog.dismiss();
 
         // display the response from the server.
-        if (response != null){
-            Toast.makeText(this.mActivity, response, Toast.LENGTH_LONG).show();
-        }
-
+        Toast.makeText(this.mActivity, response, Toast.LENGTH_LONG).show();
 
     }
+    
 }

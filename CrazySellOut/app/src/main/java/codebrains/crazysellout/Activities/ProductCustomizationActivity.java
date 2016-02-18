@@ -2,9 +2,7 @@ package codebrains.crazysellout.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.DatePicker;
@@ -12,18 +10,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import codebrains.crazysellout.AsyncTasks.AttemptAddProduct;
+import codebrains.crazysellout.AsyncTasks.AttemptCustomizationOfProduct;
 import codebrains.crazysellout.Controllers.AddProductController;
 import codebrains.crazysellout.R;
 import codebrains.crazysellout.System.Conversions;
 import codebrains.crazysellout.System.Coordinates;
 import codebrains.crazysellout.System.SystemDialogs;
 
-import static codebrains.crazysellout.Activities.MainProducerActivity.GetUsername;
 
 public class ProductCustomizationActivity extends Activity {
 
@@ -33,6 +28,7 @@ public class ProductCustomizationActivity extends Activity {
     private TextView longitude, latitude, city;
 
     private String username;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +61,7 @@ public class ProductCustomizationActivity extends Activity {
             this.latitude.setText(selectedItemJSON.get("latitude").toString());
             this.city.setText(selectedItemJSON.get("city").toString());
             this.username = selectedItemJSON.get("username").toString();
+            this.id = Conversions.ConvertStringToInteger(selectedItemJSON.getString("id"));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -169,6 +166,7 @@ public class ProductCustomizationActivity extends Activity {
             jsonObject.put("latitude", latit);
             jsonObject.put("city", storeCity);
             jsonObject.put("username", username);
+            jsonObject.put("id", id);
             jsonObject.put("customizeType", 1);
             jsonObject.put("status", true);
             jsonObject.put("message", "");
@@ -181,8 +179,7 @@ public class ProductCustomizationActivity extends Activity {
         String result = apc.AddProductMainControl();
 
         if(result.equals("")){
-            Log.d("JSON DATA ----", String.valueOf(jsonObject));
-            //new AttemptAddProduct(this, jsonObject).execute();
+            new AttemptCustomizationOfProduct(this, jsonObject).execute();
         }
         else{
             SystemDialogs.DisplayInformationAlertBox(result, "Configure Product Dialog", this);
