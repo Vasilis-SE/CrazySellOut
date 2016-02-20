@@ -110,11 +110,6 @@ public class ProducerItemsFragment extends Fragment implements IAsyncResponse {
      */
     public void RefreshProducerItemsListProcess(View view){
 
-        /*
-        this.view = view;
-        listView = (ListView) this.view.findViewById(R.id.listView);
-        */
-
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("username", MainProducerActivity.GetUsername());

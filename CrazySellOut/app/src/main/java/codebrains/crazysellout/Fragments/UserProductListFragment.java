@@ -4,12 +4,17 @@ import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,6 +57,7 @@ public class UserProductListFragment extends Fragment implements IAsyncResponse 
 
         // get the listview
         expListView = (ExpandableListView) view.findViewById(R.id.lvExp);
+
 
         JSONObject jObj = new JSONObject();
         try {
@@ -154,6 +160,27 @@ public class UserProductListFragment extends Fragment implements IAsyncResponse 
             // get the listview
             expListView = (ExpandableListView) activity.findViewById(R.id.lvExp);
         }
+
+    }
+
+    public void AddProductToFavorites(View view, Activity activity){
+
+        LinearLayout l1 = (LinearLayout) view.getParent();
+
+        TextView tv1 = (TextView) l1.findViewById(R.id.lblListHeader);
+        Button button = (Button) l1.findViewById(R.id.button7);
+
+        for(int i=0; i<listDataChild.size(); i++){
+
+            for(String value : listDataChild.get(tv1.getText())){
+
+                Log.d("--------- value --------", value);
+            }
+        }
+
+        Log.d("Header Tag -------------- ", tv1.getText().toString());
+        Log.d("Header Line Count -------------- ", String.valueOf(tv1.getLineCount()));
+        Log.d("Child Data -------------- ", String.valueOf(button.getId()));
 
     }
 

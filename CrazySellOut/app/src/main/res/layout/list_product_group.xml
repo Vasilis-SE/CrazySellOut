@@ -25,7 +25,8 @@
             android:layout_height="64px"
             android:id="@+id/button7"
             android:background="@drawable/favorites_icon"
-            android:focusable="false" />
+            android:focusable="false"
+            android:onClick="AddProductToFavorites"/>
 
     </LinearLayout>
 

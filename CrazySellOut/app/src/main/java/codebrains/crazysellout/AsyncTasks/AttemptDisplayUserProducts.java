@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import codebrains.crazysellout.Fragments.ProducerItemsFragment;
 import codebrains.crazysellout.Interfaces.IAsyncResponse;
 import codebrains.crazysellout.System.Connectivity;
 import codebrains.crazysellout.System.JSONParser;
+import codebrains.crazysellout.System.SystemDialogs;
 
 /**
  * Created by Vasilhs on 2/11/2016.
@@ -75,10 +77,13 @@ public class AttemptDisplayUserProducts extends AsyncTask<String, String, String
      */
     public void onPostExecute(String response) {
 
-        //Sets as an output to the interface the response of the server.
-        delegate.ProcessFinish(response, mActivity);
         pDialog.dismiss();
 
+        //Sets as an output to the interface the response of the server.
+        delegate.ProcessFinish(response, mActivity);
+
+
     }
+
 
 }

@@ -103,6 +103,20 @@ public class ProductList {
         return list;
     }
 
+    /**
+     * Method that initializes the array list to be displayed to the user when the response
+     * from server didn't bring any results (empty user product list etc.).
+     * @param message The string message response from server.
+     * @return Returns the initialized array list to be displayed to the user.
+     */
+    public ArrayList<String> ArrayListForEmptyUserProductList(String message){
+
+        ArrayList<String> list = new ArrayList<String>();
+        list.add(message);
+
+        return list;
+    }
+
     public List<String> GetListOfHeaders(){
         return this.listDataHeader;
     }

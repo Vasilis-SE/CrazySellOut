@@ -53,8 +53,9 @@ public class DisplayProductsController {
             JSONObject jsonObject = new JSONObject(response);
 
             if(jsonObject.get("status") == false){
-                SystemDialogs.DisplayInformationAlertBox(jsonObject.get("message").toString(), "Display Products Dialog",
-                        activity);
+
+                ProductList pl = new ProductList();
+                list = pl.ArrayListForEmptyUserProductList(jsonObject.get("message").toString());
             }
             else{
 
