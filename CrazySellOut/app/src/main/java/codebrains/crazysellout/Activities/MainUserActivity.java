@@ -1,6 +1,7 @@
 package codebrains.crazysellout.Activities;
 
 
+import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -16,8 +17,9 @@ public class MainUserActivity extends ActionBarActivity implements  android.supp
 
     private ViewPager tabsviewPager;
     private UserTabsAdapter mTabsAdapter;
-
     private UserProductListFragment uplf;
+
+    private static String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,10 @@ public class MainUserActivity extends ActionBarActivity implements  android.supp
         tabsviewPager = (ViewPager) findViewById(R.id.tabspager);
         mTabsAdapter = new UserTabsAdapter(getSupportFragmentManager());
         tabsviewPager.setAdapter(mTabsAdapter);
+
+        //Get the previous intent.
+        Intent myIntent = getIntent();
+        this.username = myIntent.getStringExtra("username");
 
         this.uplf = new UserProductListFragment();
 
@@ -77,6 +83,10 @@ public class MainUserActivity extends ActionBarActivity implements  android.supp
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
 
+    }
+
+    public static String GetUsername(){
+        return username;
     }
 
     /**

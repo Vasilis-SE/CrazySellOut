@@ -287,6 +287,41 @@
 			return $response;
 			
 		}
+		
+		//Method that adds the product into the favorites table in database.
+		public function AddProductToFavorites(){
+			
+			$query = "SELECT * FROM products WHERE productName='$this->productName' ";
+			$product = mysql_query($query);
+				
+			if(mysql_num_rows($product) == 0){
+				$response["status"] = false;
+				$response["message"] = "Error while adding product to favorites! Please try again later.";
+				return $response;
+			}
+
+			if(mysql_num_rows($product) > 1)
+				$product = mysql_fetch_array($product[0]);
+			else
+				$product = mysql_fetch_array($product);
+
+			$query = "INSERT INTO favorites (username, productName, storeName, category, 
+				price, description, expireDate, longitude, latitude, city)
+				VALUES ('".$this->username."', '".$product['productName']."', '".$product['storeName']."', 
+				'".$product['category']."', '".$product['price']."', '".$product['description']."', '".$product['expireDate']."', 
+				'".$product['longitude']."', '".$product['latitude']."', '".$product['city']."')";
+			$result2 = mysql_query($query);	
+			
+			if($result2 === false){
+				$response["status"] = false;
+				$response["message"] = "Something went wrong while adding the product into the database! Please try again later or contact the support team.";
+				return $response;
+			}
+			
+			$response["status"] = true;
+			$response["message"] = "Product has been added to favorites!";
+			return $response;
+		}
 
 		
 		

@@ -3,20 +3,15 @@ package codebrains.crazysellout.AsyncTasks;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.Switch;
 import android.widget.Toast;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-
 import codebrains.crazysellout.Activities.MainActivity;
 import codebrains.crazysellout.Activities.MainProducerActivity;
 import codebrains.crazysellout.Activities.MainUserActivity;

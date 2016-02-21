@@ -8,10 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,10 +28,13 @@ import java.util.List;
 import codebrains.crazysellout.Adapters.ExpandableListAdapter;
 import codebrains.crazysellout.Adapters.ProductsExpandableListAdapter;
 import codebrains.crazysellout.AsyncTasks.AttemptDisplayProducts;
+import codebrains.crazysellout.AsyncTasks.AttemptToAddFavorite;
 import codebrains.crazysellout.Controllers.DisplayProductsController;
 import codebrains.crazysellout.Interfaces.IAsyncResponse;
 import codebrains.crazysellout.R;
 import codebrains.crazysellout.System.SystemDialogs;
+
+import static codebrains.crazysellout.Activities.MainUserActivity.GetUsername;
 
 public class UserProductListFragment extends Fragment implements IAsyncResponse {
 
@@ -163,24 +168,28 @@ public class UserProductListFragment extends Fragment implements IAsyncResponse 
 
     }
 
+    /**
+     * Method that handles the add of favorites in the favorites table in database.
+     * @param view The view of the activity that fired the event.
+     * @param activity The activity that called the method.
+     */
     public void AddProductToFavorites(View view, Activity activity){
 
         LinearLayout l1 = (LinearLayout) view.getParent();
-
         TextView tv1 = (TextView) l1.findViewById(R.id.lblListHeader);
-        Button button = (Button) l1.findViewById(R.id.button7);
+        String headerText = tv1.getText().toString().trim();
 
-        for(int i=0; i<listDataChild.size(); i++){
+        Log.d("header Text ---------- ", headerText);
 
-            for(String value : listDataChild.get(tv1.getText())){
-
-                Log.d("--------- value --------", value);
-            }
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("productName", headerText);
+            jsonObject.put("username", GetUsername());
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
-        Log.d("Header Tag -------------- ", tv1.getText().toString());
-        Log.d("Header Line Count -------------- ", String.valueOf(tv1.getLineCount()));
-        Log.d("Child Data -------------- ", String.valueOf(button.getId()));
+        new AttemptToAddFavorite((Activity) view.getContext(), jsonObject).execute();
 
     }
 
