@@ -2,22 +2,17 @@ package codebrains.crazysellout.Fragments;
 
 import android.app.Activity;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-
-import codebrains.crazysellout.Activities.MainProducerActivity;
 import codebrains.crazysellout.AsyncTasks.AttemptDisplayFavorites;
-import codebrains.crazysellout.AsyncTasks.AttemptDisplayUserProducts;
 import codebrains.crazysellout.Controllers.DisplayFavoritesController;
 import codebrains.crazysellout.Interfaces.IAsyncResponse;
 import codebrains.crazysellout.R;
@@ -31,6 +26,7 @@ public class UserFavoritesFragment extends Fragment implements IAsyncResponse {
     private AttemptDisplayFavorites asyncTask;
 
     private String response;
+    private String selectedItem;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,6 +46,16 @@ public class UserFavoritesFragment extends Fragment implements IAsyncResponse {
         asyncTask = new AttemptDisplayFavorites((Activity) this.view.getContext(), jsonObject);
         asyncTask.delegate = this;
         asyncTask.execute();
+
+        //List view click item listener.
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                view.setBackgroundColor(getResources().getColor(R.color.listItemSelected));
+                selectedItem = parent.getItemAtPosition(position).toString();
+            }
+        });
 
         return view;
     }

@@ -25,13 +25,23 @@
             android:layout_above="@+id/button9"/>
 
         <Button
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:id="@+id/button9"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:background="@drawable/refresh_icon" />
+
+        <Button
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:id="@+id/button8"
+            android:layout_below="@+id/listView2"
+            android:layout_toLeftOf="@+id/button9"
+            android:layout_toStartOf="@+id/button9"
+            android:background="@drawable/delete_icon"
+            android:layout_marginRight="15dp"/>
 
     </RelativeLayout>
 </ScrollView>
