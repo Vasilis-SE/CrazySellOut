@@ -322,6 +322,35 @@
 			$response["message"] = "Product has been added to favorites!";
 			return $response;
 		}
+		
+		//Method that draws all the favorite products from the database to be displayed to user.
+		public function GetFavoritesFromDatabase(){
+		
+			$query = "SELECT * FROM favorites WHERE username='$this->username' ";
+			$result = mysql_query($result);
+			
+			if($result === false){
+				$response["status"] = false;
+				$response["message"] = "Something went wrong while trying to retrieve favorites from database!";
+				return $response;
+			}
+			
+			if(mysql_num_rows($result) == 0){
+				$response["status"] = false;
+				$response["message"] = "You don't have any favorite product!";
+				return $response;
+			}
+			
+			$response["status"] = true;
+			
+			$rows = array();
+			while($r = mysql_fetch_assoc($result)) {
+				$rows[] = $r;
+			}
+			$response["message"] = $rows;
+			
+			return $response;
+		}
 
 		
 		
