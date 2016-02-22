@@ -7,14 +7,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import codebrains.crazysellout.Activities.MainProducerActivity;
 import codebrains.crazysellout.AsyncTasks.AttemptDisplayFavorites;
 import codebrains.crazysellout.AsyncTasks.AttemptDisplayUserProducts;
+import codebrains.crazysellout.Controllers.DisplayFavoritesController;
 import codebrains.crazysellout.Interfaces.IAsyncResponse;
 import codebrains.crazysellout.R;
 
@@ -54,8 +58,27 @@ public class UserFavoritesFragment extends Fragment implements IAsyncResponse {
     @Override
     public void ProcessFinish(String output, Activity activity) {
 
+        response = output;
+        this.ProcessOutput(response, activity);
+
     }
 
+    /**
+     * Method that processes the response from the database to be display to the user.
+     * @param response The response of the database in string format.
+     * @param activity The activity that called the method.
+     */
+    private void ProcessOutput(String response, Activity activity){
+
+        DisplayFavoritesController dfc = new DisplayFavoritesController(response);
+        ArrayList<String> arrayList = dfc.SetFavoritesListForDisplay();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.favorites_list_row, arrayList);
+        if(listView == null)
+            listView = (ListView) activity.findViewById(R.id.listView2);
+
+        listView.setAdapter(adapter);
+    }
 
 
 }

@@ -57,7 +57,7 @@ public class AttemptDisplayFavorites extends AsyncTask<String, String, String>  
         if(Connectivity.RemoteServerIsReachable(this.mActivity)) {
 
             // Getting product details by making HTTP request
-            JSONObject json = this.jsonParser.makeHttpRequest("http://crazysellout.comule.com/ProductsDisplay.php",
+            JSONObject json = this.jsonParser.makeHttpRequest("http://crazysellout.comule.com/DisplayFavorite.php",
                     "POST", parameters);
 
 
