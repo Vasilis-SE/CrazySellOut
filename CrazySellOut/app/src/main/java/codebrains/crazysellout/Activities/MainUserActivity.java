@@ -10,16 +10,18 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
 import codebrains.crazysellout.Adapters.UserTabsAdapter;
+import codebrains.crazysellout.Fragments.UserFavoritesFragment;
 import codebrains.crazysellout.Fragments.UserProductListFragment;
 import codebrains.crazysellout.R;
 
 public class MainUserActivity extends ActionBarActivity implements  android.support.v7.app.ActionBar.TabListener{
 
     private ViewPager tabsviewPager;
-    private UserTabsAdapter mTabsAdapter;
-    private UserProductListFragment uplf;
-
     private static String username;
+    private UserTabsAdapter mTabsAdapter;
+
+    private UserProductListFragment uplf;
+    private UserFavoritesFragment uff;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class MainUserActivity extends ActionBarActivity implements  android.supp
         this.username = myIntent.getStringExtra("username");
 
         this.uplf = new UserProductListFragment();
+        this.uff = new UserFavoritesFragment();
 
         this.getSupportActionBar().setHomeButtonEnabled(false);
         this.getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -105,5 +108,12 @@ public class MainUserActivity extends ActionBarActivity implements  android.supp
         this.uplf.AddProductToFavorites(view, this);
     }
 
+    /**
+     * Event on click that occurs whenever the refresh button on the favorite list tab is pressed.
+     * @param view The view of the activity that fired the event.
+     */
+    public void RefreshFavoriteListProcess(View view){
+        this.uff.RefreshFavoriteListProcess(view);
+    }
 
 }

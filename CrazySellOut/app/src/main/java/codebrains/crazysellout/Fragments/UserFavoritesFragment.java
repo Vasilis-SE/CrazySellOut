@@ -12,6 +12,7 @@ import android.widget.ListView;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import codebrains.crazysellout.Activities.MainProducerActivity;
 import codebrains.crazysellout.AsyncTasks.AttemptDisplayFavorites;
 import codebrains.crazysellout.Controllers.DisplayFavoritesController;
 import codebrains.crazysellout.Interfaces.IAsyncResponse;
@@ -27,6 +28,12 @@ public class UserFavoritesFragment extends Fragment implements IAsyncResponse {
 
     private String response;
     private String selectedItem;
+
+    //Constructor
+    public UserFavoritesFragment() {
+        // Required empty public constructor
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,6 +91,24 @@ public class UserFavoritesFragment extends Fragment implements IAsyncResponse {
             listView = (ListView) activity.findViewById(R.id.listView2);
 
         listView.setAdapter(adapter);
+    }
+
+    /**
+     * Event on click that occurs whenever the refresh button on the favorite list tab is pressed.
+     * @param view The view of the activity that fired the event.
+     */
+    public void RefreshFavoriteListProcess(View view){
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("username", GetUsername());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        asyncTask = new AttemptDisplayFavorites((Activity) view.getContext(), jsonObject);
+        asyncTask.delegate = this;
+        asyncTask.execute();
     }
 
 
