@@ -300,6 +300,12 @@
 				return $response;
 			}
 
+			if($this->FavoriteProductAlreadyExistsCheck() == false){
+				$response["status"] = false;
+				$response["message"] = "You have already added this product into your favorite list!";
+				return $response;
+			}
+			
 			if(mysql_num_rows($product) > 1)
 				$product = mysql_fetch_array($product[0]);
 			else
@@ -321,6 +327,19 @@
 			$response["status"] = true;
 			$response["message"] = "Product has been added to favorites!";
 			return $response;
+		}
+		
+		//Method that checks if the product to be added into the favorites has already been
+		//added in the past.
+		public function FavoriteProductAlreadyExistsCheck(){
+			
+			$query = "SELECT * FROM favorites WHERE productName='$this->productName' AND username='$this->username' ";
+			$result = mysql_query($query);	
+			
+			if(mysql_num_rows($result) > 0)
+				return false;
+			else
+				return true;	
 		}
 		
 		//Method that draws all the favorite products from the database to be displayed to user.
