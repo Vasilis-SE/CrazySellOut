@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#3F51B5</color>
     <color name="colorAccent">#E53935</color>
     <color name="listItemSelected">#9ade7d</color>
+    <color name="transparentBackground">#00000000</color>
+
 </resources>

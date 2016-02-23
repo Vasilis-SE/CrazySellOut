@@ -3,6 +3,7 @@ package codebrains.crazysellout.Fragments;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,12 @@ import android.widget.ListView;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
-import codebrains.crazysellout.Activities.MainProducerActivity;
 import codebrains.crazysellout.AsyncTasks.AttemptDisplayFavorites;
 import codebrains.crazysellout.Controllers.DisplayFavoritesController;
 import codebrains.crazysellout.Interfaces.IAsyncResponse;
 import codebrains.crazysellout.R;
+import codebrains.crazysellout.System.StringSplit;
+import codebrains.crazysellout.System.SystemDialogs;
 
 import static codebrains.crazysellout.Activities.MainUserActivity.GetUsername;
 
@@ -27,7 +29,9 @@ public class UserFavoritesFragment extends Fragment implements IAsyncResponse {
     private AttemptDisplayFavorites asyncTask;
 
     private String response;
-    private String selectedItem;
+    private static String selectedItem;
+    private int previousPosition;
+    private View previousView;
 
     //Constructor
     public UserFavoritesFragment() {
@@ -42,6 +46,8 @@ public class UserFavoritesFragment extends Fragment implements IAsyncResponse {
 
         this.view = view;
         this.listView = (ListView) this.view.findViewById(R.id.listView2);
+        selectedItem = null;
+        previousPosition = -1;
 
         JSONObject jsonObject = new JSONObject();
         try {
@@ -61,6 +67,13 @@ public class UserFavoritesFragment extends Fragment implements IAsyncResponse {
 
                 view.setBackgroundColor(getResources().getColor(R.color.listItemSelected));
                 selectedItem = parent.getItemAtPosition(position).toString();
+
+                if(position != previousPosition && previousPosition != -1){
+                    previousView.setBackgroundColor(getResources().getColor(R.color.transparentBackground));
+                }
+
+                previousPosition = position;
+                previousView = view;
             }
         });
 
@@ -111,5 +124,27 @@ public class UserFavoritesFragment extends Fragment implements IAsyncResponse {
         asyncTask.execute();
     }
 
+    /**
+     * Event on click that occurs whenever the delete button on the favorite list tab is pressed.
+     * @param view The view of the activity that fired the event.
+     */
+    public void DeleteFavoriteFromListProcess(View view){
+
+        if(selectedItem == null){
+            SystemDialogs.DisplayInformationAlertBox("You haven't selected any item from the list " +
+                    "to be deleted!", "Delete Favorite", (Activity) view.getContext());
+        }
+        else {
+
+            try {
+                JSONObject jsonObject = StringSplit.FavoriteListSelectedItemSplit(selectedItem);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
 
 }

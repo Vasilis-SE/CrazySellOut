@@ -116,4 +116,12 @@ public class MainUserActivity extends ActionBarActivity implements  android.supp
         this.uff.RefreshFavoriteListProcess(view);
     }
 
+    /**
+     * Event on click that occurs whenever the delete button on the favorite list tab is pressed.
+     * @param view The view of the activity that fired the event.
+     */
+    public void DeleteFavoriteFromListProcess(View view){
+        this.uff.DeleteFavoriteFromListProcess(view);
+    }
+
 }

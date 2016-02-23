@@ -42,7 +42,8 @@
             android:layout_toLeftOf="@+id/button9"
             android:layout_toStartOf="@+id/button9"
             android:background="@drawable/delete_icon"
-            android:layout_marginRight="15dp"/>
+            android:layout_marginRight="15dp"
+            android:onClick="DeleteFavoriteFromListProcess"/>
 
     </RelativeLayout>
 </ScrollView>
