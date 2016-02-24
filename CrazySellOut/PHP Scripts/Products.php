@@ -371,6 +371,24 @@
 			return $response;
 		}
 
+		//Method that deletes a favorite product record from database.
+		public function DeleteFavoriteFromDatabase(){
+		
+			$query = "DELETE FROM favorites WHERE username='".$this->username."' AND storeName='".$this->storeName."' AND 
+				price='".$this->price."' AND productName='".$this->productName."'";
+			$result = mysql_query($query);
+			
+			if($result === false){
+				$response["status"] = false;
+				$response["message"] = "Something went wrong while trying to delete the item from database!
+					Please try again later, or contact the support stuff.";
+				return $response;
+			}
+			
+			$response["status"] = true;
+			$response["message"] = "Favorite product has been deleted successfully!";
+			return $response;	
+		}
 		
 		
 	}

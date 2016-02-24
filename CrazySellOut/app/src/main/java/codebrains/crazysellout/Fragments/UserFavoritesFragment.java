@@ -13,6 +13,8 @@ import android.widget.ListView;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+
+import codebrains.crazysellout.AsyncTasks.AttemptDeleteFavorite;
 import codebrains.crazysellout.AsyncTasks.AttemptDisplayFavorites;
 import codebrains.crazysellout.Controllers.DisplayFavoritesController;
 import codebrains.crazysellout.Interfaces.IAsyncResponse;
@@ -138,12 +140,18 @@ public class UserFavoritesFragment extends Fragment implements IAsyncResponse {
 
             try {
                 JSONObject jsonObject = StringSplit.FavoriteListSelectedItemSplit(selectedItem);
+                jsonObject.put("username", GetUsername());
+                Log.d("Item Selected JSON Obj ------ ", jsonObject.toString());
+
+                new AttemptDeleteFavorite((Activity) view.getContext(), jsonObject).execute();
+
+                //Refresh the list after deletion
+                this.RefreshFavoriteListProcess(view);
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-
 
     }
 
