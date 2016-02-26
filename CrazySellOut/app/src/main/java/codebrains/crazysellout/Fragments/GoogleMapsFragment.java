@@ -5,23 +5,24 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
+
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import codebrains.crazysellout.R;
+import codebrains.crazysellout.System.Coordinates;
 
-public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
+public class GoogleMapsFragment extends Fragment {
 
-    //public static android.support.v4.app.FragmentManager fragmentManager;
-
-    MapView mapView;
-    GoogleMap map;
+    private MapView mapView;
+    private GoogleMap map;
+    private Spinner spinner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,16 +34,16 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
         // Gets to GoogleMap from the MapView and does initialization stuff
         map = mapView.getMap();
-        //map.getUiSettings().setMyLocationButtonEnabled(false);
-        //map.setMyLocationEnabled(true);
-        map.addMarker(new MarkerOptions().position(new LatLng(50.167003,19.383262)));
 
+        Coordinates coordinates = new Coordinates(this.getContext());
+
+        map.addMarker(new MarkerOptions().position(new LatLng(coordinates.GetLatitude(), coordinates.GetLongitude())));
 
         // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
         MapsInitializer.initialize(this.getActivity());
 
         // Updates the location and zoom of the MapView
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(43.1, -87.9), 10);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(coordinates.GetLatitude(), coordinates.GetLongitude()), 10);
         map.animateCamera(cameraUpdate);
 
         return v;
@@ -70,21 +71,6 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
-
-
-
-        /*
-        fragmentManager = getSupportFragmentManager();
-
-        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-        */
-
     }
 
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        // To add locations, markers and stuff here we wright code.
-    }
 }

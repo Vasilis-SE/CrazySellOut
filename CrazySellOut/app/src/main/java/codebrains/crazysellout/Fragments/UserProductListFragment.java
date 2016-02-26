@@ -179,8 +179,6 @@ public class UserProductListFragment extends Fragment implements IAsyncResponse 
         TextView tv1 = (TextView) l1.findViewById(R.id.lblListHeader);
         String headerText = tv1.getText().toString().trim();
 
-        Log.d("header Text ---------- ", headerText);
-
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("productName", headerText);

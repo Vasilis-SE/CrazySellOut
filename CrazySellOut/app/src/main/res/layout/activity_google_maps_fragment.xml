@@ -5,6 +5,15 @@
 
     <com.google.android.gms.maps.MapView android:id="@+id/mapview"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/spinner4"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner4"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:entries="@array/map_distances"/>
 
 </RelativeLayout>
