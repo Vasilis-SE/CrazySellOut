@@ -1,12 +1,13 @@
 package codebrains.crazysellout.Fragments;
 
+import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Spinner;
-
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -14,23 +15,59 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
+import org.json.JSONException;
+import org.json.JSONObject;
+import codebrains.crazysellout.AsyncTasks.AttemptRetrieveProducts;
+import codebrains.crazysellout.Interfaces.IAsyncResponse;
 import codebrains.crazysellout.R;
 import codebrains.crazysellout.System.Coordinates;
 
-public class GoogleMapsFragment extends Fragment {
+public class GoogleMapsFragment extends Fragment implements IAsyncResponse{
 
     private MapView mapView;
     private GoogleMap map;
     private Spinner spinner;
+    private AttemptRetrieveProducts asyncTask;
+
+    private static String response;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View v = inflater.inflate(R.layout.activity_google_maps_fragment, container, false);
 
         // Gets the MapView from the XML layout and creates it
         mapView = (MapView) v.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
+
+        spinner = (Spinner) v.findViewById(R.id.spinner4);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("sortcategory", "All");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        asyncTask = new AttemptRetrieveProducts(this.getActivity(), jsonObject);
+        asyncTask.delegate = this;
+        asyncTask.execute();
+
+        return v;
+    }
+
+    private void ConfigureGoogleMaps(){
 
         // Gets to GoogleMap from the MapView and does initialization stuff
         map = mapView.getMap();
@@ -45,8 +82,10 @@ public class GoogleMapsFragment extends Fragment {
         // Updates the location and zoom of the MapView
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(coordinates.GetLatitude(), coordinates.GetLongitude()), 10);
         map.animateCamera(cameraUpdate);
+    }
 
-        return v;
+    private void DisplayMarkersForProductsOnArea(){
+
     }
 
     @Override
@@ -73,4 +112,11 @@ public class GoogleMapsFragment extends Fragment {
 
     }
 
+    @Override
+    public void ProcessFinish(String output, Activity activity) {
+
+        response = output;
+
+
+    }
 }
