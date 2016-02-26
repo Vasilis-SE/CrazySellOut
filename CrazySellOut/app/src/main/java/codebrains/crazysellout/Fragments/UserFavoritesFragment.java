@@ -141,7 +141,6 @@ public class UserFavoritesFragment extends Fragment implements IAsyncResponse {
             try {
                 JSONObject jsonObject = StringSplit.FavoriteListSelectedItemSplit(selectedItem);
                 jsonObject.put("username", GetUsername());
-                Log.d("Item Selected JSON Obj ------ ", jsonObject.toString());
 
                 new AttemptDeleteFavorite((Activity) view.getContext(), jsonObject).execute();
 

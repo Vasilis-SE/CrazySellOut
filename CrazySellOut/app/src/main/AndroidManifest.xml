@@ -13,6 +13,11 @@
     <!-- GPS Permissions -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <!-- Feature for openGL to render map for application -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -53,6 +58,19 @@
         <activity android:name=".Fragments.UserProductsListActivity" >
         </activity>
         <activity android:name=".Fragments.UserProductListFragment" >
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="APIKEY" />
+
+        <activity
+            android:name=".Fragments.MapsFragment"
+            android:label="@string/title_activity_maps_fragment" >
         </activity>
     </application>
 

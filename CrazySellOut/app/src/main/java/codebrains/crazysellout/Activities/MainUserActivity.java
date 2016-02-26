@@ -23,6 +23,7 @@ public class MainUserActivity extends ActionBarActivity implements  android.supp
     private UserProductListFragment uplf;
     private UserFavoritesFragment uff;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +32,7 @@ public class MainUserActivity extends ActionBarActivity implements  android.supp
         tabsviewPager = (ViewPager) findViewById(R.id.tabspager);
         mTabsAdapter = new UserTabsAdapter(getSupportFragmentManager());
         tabsviewPager.setAdapter(mTabsAdapter);
+
 
         //Get the previous intent.
         Intent myIntent = getIntent();
@@ -75,6 +77,9 @@ public class MainUserActivity extends ActionBarActivity implements  android.supp
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+        //Change the current tab, with the one selected.
+        tabsviewPager.setCurrentItem(tab.getPosition());
 
     }
 

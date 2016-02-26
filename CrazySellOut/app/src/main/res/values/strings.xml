@@ -33,5 +33,7 @@
     </string-array>
 
     <string name="title_activity_main_user">MainUserActivity</string>
+    <string name="title_activity_maps_fragment">Map</string>
+    <string name="title_activity_maps_manager">Map</string>
 
 </resources>
