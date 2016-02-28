@@ -3,7 +3,6 @@ package codebrains.crazysellout.Controllers;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import codebrains.crazysellout.Models.CalculateDistanceModel;
 
 /**
