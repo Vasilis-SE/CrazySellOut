@@ -84,7 +84,7 @@ public class MainProducerActivity extends ActionBarActivity implements  android.
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-        tabsviewPager.setCurrentItem(tab.getPosition());
+
     }
 
     @Override

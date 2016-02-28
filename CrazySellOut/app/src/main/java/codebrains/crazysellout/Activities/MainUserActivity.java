@@ -1,5 +1,6 @@
 package codebrains.crazysellout.Activities;
 
+
 import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;

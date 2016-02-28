@@ -1,9 +1,11 @@
 package codebrains.crazysellout.Models;
 
 import android.location.Location;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import codebrains.crazysellout.System.Conversions;
 
 /**
