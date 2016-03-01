@@ -1,9 +1,8 @@
 package codebrains.crazysellout.System;
 
-import android.util.Log;
 
 /**
- * Created by Vasilhs on 2/3/2016.
+ * Class that contains methods valid to convert a data format type to another.
  */
 public class Conversions {
 
@@ -19,7 +18,15 @@ public class Conversions {
      */
     public static Double ConvertStringToDouble(String string){
 
-        double data = Double.parseDouble(string);
+        double data;
+
+        try {
+            data = Double.parseDouble(string);
+        }
+        catch(NullPointerException ex){
+            throw new NullPointerException();
+        }
+
         return data;
     }
 
@@ -30,7 +37,15 @@ public class Conversions {
      */
     public static String ConvertDoubleToString(double num){
 
-        String data = String.valueOf(num);
+        String data;
+
+        try {
+            data = String.valueOf(num);
+        }
+        catch(NullPointerException ex){
+            throw new NullPointerException();
+        }
+
         return data;
     }
 
@@ -41,7 +56,15 @@ public class Conversions {
      */
     public static int ConvertStringToInteger(String num){
 
-        int number = Integer.parseInt(num);
+        int number;
+
+        try {
+            number = Integer.parseInt(num);
+        }
+        catch(NullPointerException ex){
+            throw new NullPointerException();
+        }
+
         return number;
     }
 
@@ -52,7 +75,15 @@ public class Conversions {
      */
     public static String ConvertIntegerToString(int num){
 
-        String string = String.valueOf(num);
+        String string;
+
+        try {
+            string = String.valueOf(num);
+        }
+        catch (NullPointerException ex){
+            throw new NullPointerException();
+        }
+
         return string;
     }
 

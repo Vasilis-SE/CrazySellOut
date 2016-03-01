@@ -35,6 +35,11 @@ public class MainActivity extends ActionBarActivity implements  android.support.
     private RadioGroup sexRadioButtonGroup, accountTypeRadioButtonGroup;
     private boolean isTermsChecked;
 
+    //Constructor
+    public MainActivity(){
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

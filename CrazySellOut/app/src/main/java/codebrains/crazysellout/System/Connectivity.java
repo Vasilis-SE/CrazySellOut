@@ -10,7 +10,8 @@ import java.net.InetAddress;
 import codebrains.crazysellout.Activities.MainActivity;
 
 /**
- * Created by Vasilhs on 1/20/2016.
+ * Class that contains methods that check the connection between the app and the remote server and
+ * whether the device has enables the wifi.
  */
 public class Connectivity {
 
@@ -27,12 +28,21 @@ public class Connectivity {
      */
     public static void WifiEnabledCheck(Activity activityObj){
 
-        WifiManager mng = (WifiManager) activityObj.getSystemService(Context.WIFI_SERVICE);
+        try {
+            WifiManager mng = (WifiManager) activityObj.getSystemService(Context.WIFI_SERVICE);
 
-        if(!mng.isWifiEnabled()){
-            SystemDialogs.DisplayErrorAlertBox("Your wifi is not enabled!\nPlease turn your wifi on" +
-                    " and re-open the application.", "Wifi not enabled", activityObj);
+            if (!mng.isWifiEnabled()) {
+                SystemDialogs.DisplayErrorAlertBox("Your wifi is not enabled!\nPlease turn your wifi on" +
+                        " and re-open the application.", "Wifi not enabled", activityObj);
+            }
         }
+        catch (NullPointerException ex){
+            throw new NullPointerException();
+        }
+        catch (ClassCastException ex){
+            throw new ClassCastException();
+        }
+
     }
 
     /**
@@ -42,18 +52,19 @@ public class Connectivity {
      */
     public static boolean RemoteServerIsReachable(Activity activityObj){
 
+
         try {
-            if(!InetAddress.getByName("http://crazysellout.comule.com").isReachable(2000)){
+            if(!InetAddress.getByName("http://crazysellout.comule.com").isReachable(2000)) {
                 SystemDialogs.DisplayInformationAlertBox("The server is not reachable at the moment.\n" +
                         "Please try again later.", "Server Connection", activityObj);
                 return false;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        }
+        catch (IOException e) {
+
         }
 
         return true;
     }
-
 
 }
