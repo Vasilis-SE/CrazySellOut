@@ -11,7 +11,7 @@ import codebrains.crazysellout.System.Connectivity;
 import static junit.framework.Assert.assertTrue;
 
 /**
- * Created by Vasilhs on 2/29/2016.
+ * Test unit class that tests all the methods inside the Conversions class.
  */
 
 @RunWith(MockitoJUnitRunner.class)
