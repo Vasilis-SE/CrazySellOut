@@ -1,5 +1,7 @@
 package codebrains.crazysellout.System;
 
+import org.mockito.internal.matchers.Null;
+
 /**
  * Created by Vasilhs on 1/24/2016.
  */
@@ -19,7 +21,13 @@ public class ServerAnalytics {
      */
     public static String RemoveServerAnalyticsFromResponse(String response){
 
-        String result = response.substring(3).trim();
+        String result;
+        try {
+            result = response.substring(3).trim();
+        }
+        catch(NullPointerException e){
+            throw new NullPointerException();
+        }
 
         return result;
     }
