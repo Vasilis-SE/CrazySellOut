@@ -4,7 +4,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by Vasilhs on 2/4/2016.
+ * Class that contains proper methods to check the integrity of product addition before the new
+ * product is registered inside the database.
  */
 public class AddProductModel {
 
@@ -30,6 +31,8 @@ public class AddProductModel {
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        } catch (NullPointerException e){
+            throw new NullPointerException();
         }
     }
 
@@ -50,6 +53,8 @@ public class AddProductModel {
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        } catch (NullPointerException e){
+            throw new NullPointerException();
         }
 
     }

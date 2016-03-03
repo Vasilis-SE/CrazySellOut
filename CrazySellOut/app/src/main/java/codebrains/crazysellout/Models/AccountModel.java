@@ -1,12 +1,11 @@
 package codebrains.crazysellout.Models;
 
-import android.util.Log;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by Vasilhs on 1/9/2016.
+ * Class that contains methods to checks the integrity of new account before it is registered
+ * inside the database.
  */
 public class AccountModel {
 
@@ -50,7 +49,10 @@ public class AccountModel {
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            throw new NullPointerException();
         }
+
 
     }
 
@@ -72,6 +74,8 @@ public class AccountModel {
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        } catch (NullPointerException e){
+            throw new NullPointerException();
         }
     }
 
@@ -93,10 +97,14 @@ public class AccountModel {
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        } catch (NullPointerException e){
+            throw new NullPointerException();
         }
     }
 
-
+    /**
+     * Method that checks if the password and the retyped password is the same.
+     */
     public void PasswordAndRepasswordMismatch(){
 
         try {
@@ -108,6 +116,8 @@ public class AccountModel {
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        } catch (NullPointerException e){
+            throw new NullPointerException();
         }
     }
 
