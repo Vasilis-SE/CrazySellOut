@@ -2,10 +2,8 @@ package codebrains.crazysellout.AsyncTasks;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
@@ -16,7 +14,7 @@ import codebrains.crazysellout.System.Connectivity;
 import codebrains.crazysellout.System.JSONParser;
 
 /**
- * Created by Vasilhs on 2/16/2016.
+ * Async class that handles the send of data product data for the update / delete product process.
  */
 public class AttemptCustomizationOfProduct extends AsyncTask<String, String, String> {
 

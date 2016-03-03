@@ -3,11 +3,12 @@ package codebrains.crazysellout.Models;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 /**
- * Created by Vasilhs on 2/22/2016.
+ * Class that handles the display of all the favorite products of the user into a list. If the user
+ * doesn't have any favorite product registered inside the database then the list is initialized with
+ * a single message showing that there are no favorite products registered.
  */
 public class FavoritesModel {
 

@@ -3,10 +3,12 @@ package codebrains.crazysellout.Adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-
 import codebrains.crazysellout.Fragments.CreatAccountFragment;
 import codebrains.crazysellout.Fragments.LoginFragment;
 
+/**
+ * Class that initializes that tabs of the main activity UI.
+ */
 public class Tabsadapter  extends FragmentStatePagerAdapter{
 
     private int TOTAL_TABS = 2;

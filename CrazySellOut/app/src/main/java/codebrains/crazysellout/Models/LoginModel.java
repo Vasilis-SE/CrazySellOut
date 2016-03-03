@@ -2,9 +2,11 @@ package codebrains.crazysellout.Models;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.mockito.internal.matchers.Null;
 
 /**
- * Created by Vasilhs on 1/25/2016.
+ * Class that contains proper methods to check the integrity of the new product before it is added
+ * to the database.
  */
 public class LoginModel {
 
@@ -29,6 +31,8 @@ public class LoginModel {
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            throw new NullPointerException();
         }
 
     }
@@ -50,6 +54,11 @@ public class LoginModel {
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            throw new NullPointerException();
         }
     }
+
+
+
 }

@@ -7,14 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
-
 import java.util.HashMap;
 import java.util.List;
-
 import codebrains.crazysellout.R;
 
 /**
- * Created by Vasilhs on 2/18/2016.
+ * Class that handles the data inside the products expandable list.
  */
 public class ProductsExpandableListAdapter extends BaseExpandableListAdapter {
 

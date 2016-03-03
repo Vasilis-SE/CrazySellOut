@@ -9,7 +9,10 @@ import org.json.JSONObject;
 import codebrains.crazysellout.System.Conversions;
 
 /**
- * Created by Vasilhs on 2/26/2016.
+ * Class that calculates the distance between a single product object and the user and if it is
+ * inside the selected distance area (its selected by the user) the this specific product is added
+ * inside a json array to be later displayed into the map. This process is repeated for every product
+ * in the database.
  */
 public class CalculateDistanceModel {
 

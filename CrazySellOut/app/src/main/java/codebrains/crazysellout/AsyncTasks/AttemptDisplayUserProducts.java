@@ -3,23 +3,18 @@ package codebrains.crazysellout.AsyncTasks;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import codebrains.crazysellout.Fragments.ProducerItemsFragment;
 import codebrains.crazysellout.Interfaces.IAsyncResponse;
 import codebrains.crazysellout.System.Connectivity;
 import codebrains.crazysellout.System.JSONParser;
-import codebrains.crazysellout.System.SystemDialogs;
 
 /**
- * Created by Vasilhs on 2/11/2016.
+ * Async class that handles the receive of user products (products added by the producer-user) from
+ * the database in order to be displayed to him.
  */
 public class AttemptDisplayUserProducts extends AsyncTask<String, String, String> {
 

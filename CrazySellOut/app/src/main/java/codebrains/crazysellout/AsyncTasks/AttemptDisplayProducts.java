@@ -13,7 +13,8 @@ import codebrains.crazysellout.System.Connectivity;
 import codebrains.crazysellout.System.JSONParser;
 
 /**
- * Created by Vasilhs on 2/8/2016.
+ * Async class that handles the receive of data products from database in order to be displayed to
+ * the user.
  */
 public class AttemptDisplayProducts extends AsyncTask<String, String, String> {
 

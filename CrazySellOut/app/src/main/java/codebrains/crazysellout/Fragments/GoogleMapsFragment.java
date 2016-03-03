@@ -17,7 +17,6 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -125,7 +124,7 @@ public class GoogleMapsFragment extends Fragment implements IAsyncResponse{
             else {
                 map.addMarker(new MarkerOptions().position(new LatLng(Conversions.ConvertStringToDouble(jsonObject.get("latitude").toString())
                         , Conversions.ConvertStringToDouble(jsonObject.get("longitude").toString())))
-                        .title(jsonObject.get("productName").toString()));
+                        .title(jsonObject.get("storeName") + ": " + jsonObject.get("productName").toString()));
             }
         }
 

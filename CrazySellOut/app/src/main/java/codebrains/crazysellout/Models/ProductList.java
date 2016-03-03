@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by Vasilhs on 2/9/2016.
+ * Class that initialize the expandable list in the activity from the response that the server returned.
  */
 public class ProductList {
 

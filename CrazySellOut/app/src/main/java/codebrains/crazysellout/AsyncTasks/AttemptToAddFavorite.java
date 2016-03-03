@@ -2,30 +2,20 @@ package codebrains.crazysellout.AsyncTasks;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.view.animation.AccelerateInterpolator;
 import android.widget.Toast;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-
-import codebrains.crazysellout.Activities.MainActivity;
-import codebrains.crazysellout.Activities.MainProducerActivity;
-import codebrains.crazysellout.Activities.MainUserActivity;
 import codebrains.crazysellout.System.Connectivity;
-import codebrains.crazysellout.System.Encryption;
 import codebrains.crazysellout.System.JSONParser;
 
 /**
- * Created by Vasilhs on 2/21/2016.
+ * Async class that handles the send of data to the remote server in order to add a new product
+ * into the database.
  */
 public class AttemptToAddFavorite extends AsyncTask<String, String, String> {
 

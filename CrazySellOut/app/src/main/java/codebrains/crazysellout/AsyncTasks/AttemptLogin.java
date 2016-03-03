@@ -20,7 +20,7 @@ import codebrains.crazysellout.System.Encryption;
 import codebrains.crazysellout.System.JSONParser;
 
 /**
- * Created by Vasilhs on 1/27/2016.
+ * Async class that handles the send and receive of data for the login process.
  */
 public class AttemptLogin extends AsyncTask<String, String, String> {
 

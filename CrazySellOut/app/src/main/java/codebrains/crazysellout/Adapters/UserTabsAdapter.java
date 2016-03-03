@@ -9,7 +9,7 @@ import codebrains.crazysellout.Fragments.UserProductListFragment;
 
 
 /**
- * Created by Vasilhs on 1/21/2016.
+ * Class that initializes the tabs of the user UI.
  */
 public class UserTabsAdapter extends FragmentStatePagerAdapter{
 

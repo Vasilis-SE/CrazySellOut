@@ -3,20 +3,18 @@ package codebrains.crazysellout.AsyncTasks;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import codebrains.crazysellout.Interfaces.IAsyncResponse;
 import codebrains.crazysellout.System.Connectivity;
 import codebrains.crazysellout.System.JSONParser;
 
 /**
- * Created by Vasilhs on 2/22/2016.
+ * Async class that handles the receive of favorite products from the database in order to be
+ * displayed to the user.
  */
 public class AttemptDisplayFavorites extends AsyncTask<String, String, String>  {
 

@@ -8,7 +8,7 @@ import codebrains.crazysellout.Fragments.ProducerItemsFragment;
 import codebrains.crazysellout.Fragments.ProductsListActivity;
 
 /**
- * Created by Vasilhs on 1/29/2016.
+ * Class that initializes the tabs on the producer UI
  */
 public class ProducerTabsAdapter extends FragmentStatePagerAdapter {
 

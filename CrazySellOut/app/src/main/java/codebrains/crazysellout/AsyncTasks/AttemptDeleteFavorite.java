@@ -4,25 +4,18 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.widget.Toast;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-
-import codebrains.crazysellout.Activities.MainActivity;
-import codebrains.crazysellout.Fragments.AddItemsFragment;
 import codebrains.crazysellout.System.Connectivity;
-import codebrains.crazysellout.System.Encryption;
 import codebrains.crazysellout.System.JSONParser;
 
 /**
- * Created by Vasilhs on 2/24/2016.
+ * Async class that handles the send of favorite product data to the server in order to delete the
+ * register from the database.
  */
 public class AttemptDeleteFavorite extends AsyncTask<String, String, String> {
 

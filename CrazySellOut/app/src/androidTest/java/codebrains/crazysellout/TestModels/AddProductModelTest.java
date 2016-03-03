@@ -67,8 +67,6 @@ public class AddProductModelTest {
         apm.FieldIsEmptyCheck();
     }
 
-    //////////////////
-
     @Test
     public void TestCoordinatesInFormNotSetted(){
 

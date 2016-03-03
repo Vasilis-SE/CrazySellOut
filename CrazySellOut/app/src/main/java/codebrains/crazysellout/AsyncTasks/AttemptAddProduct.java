@@ -18,7 +18,7 @@ import codebrains.crazysellout.System.Connectivity;
 import codebrains.crazysellout.System.JSONParser;
 
 /**
- * Created by Vasilhs on 2/4/2016.
+ * Async class that handles the send and receive of data for the add product process.
  */
 public class AttemptAddProduct extends AsyncTask<String, String, String> {
 
