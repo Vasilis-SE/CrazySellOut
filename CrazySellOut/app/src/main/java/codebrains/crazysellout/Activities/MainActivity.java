@@ -55,8 +55,14 @@ public class MainActivity extends ActionBarActivity implements  android.support.
         this.getSupportActionBar().setHomeButtonEnabled(false);
         this.getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        Tab loginTab = getSupportActionBar().newTab().setText("Login").setTabListener(this);
-        Tab createAccountTab = getSupportActionBar().newTab().setText("Create Account").setTabListener(this);
+        Tab loginTab = getSupportActionBar().newTab()
+                .setText(" Login")
+                .setTabListener(this)
+                .setIcon(R.drawable.login_icon);
+        Tab createAccountTab = getSupportActionBar().newTab()
+                .setText(" Create Account")
+                .setTabListener(this)
+                .setIcon(R.drawable.create_new_account_icon);
 
         getSupportActionBar().addTab(loginTab);
         getSupportActionBar().addTab(createAccountTab);
@@ -126,7 +132,7 @@ public class MainActivity extends ActionBarActivity implements  android.support.
             "The copyright in all material contained on, in, or available through the App including " +
             "all information, data, text, music, sound, photographs, graphics and video messages, " +
             "the selection and arrangement thereof, and all source code, software compilations and " +
-            "other material (“Material“) is owned by the creators of this application. \n\n" +
+            "other material ('Material') is owned by the creators of this application. \n\n" +
             "DATA TERMS : \n" +
             "The application will use user data given by you during the account creation (number, email etc) " +
             "in order to fulfill certain functionalities such as google maps location search.";

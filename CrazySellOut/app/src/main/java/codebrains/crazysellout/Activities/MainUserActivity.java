@@ -44,9 +44,18 @@ public class MainUserActivity extends ActionBarActivity implements  android.supp
         this.getSupportActionBar().setHomeButtonEnabled(false);
         this.getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        Tab productsTab = getSupportActionBar().newTab().setText("Products").setTabListener(this);
-        Tab favoritesTab = getSupportActionBar().newTab().setText("Favorites").setTabListener(this);
-        Tab mapTab = getSupportActionBar().newTab().setText("Map").setTabListener(this);
+        Tab productsTab = getSupportActionBar().newTab()
+                .setText(" Products")
+                .setTabListener(this)
+                .setIcon(R.drawable.product_icon);
+        Tab favoritesTab = getSupportActionBar().newTab()
+                .setText(" Favorites")
+                .setTabListener(this)
+                .setIcon(R.drawable.favorite_icon);
+        Tab mapTab = getSupportActionBar().newTab()
+                .setText(" Map")
+                .setTabListener(this)
+                .setIcon(R.drawable.location_pin_icon);
 
         getSupportActionBar().addTab(productsTab);
         getSupportActionBar().addTab(favoritesTab);

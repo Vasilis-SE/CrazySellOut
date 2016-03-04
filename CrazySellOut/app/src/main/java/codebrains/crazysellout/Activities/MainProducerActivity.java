@@ -50,9 +50,18 @@ public class MainProducerActivity extends ActionBarActivity implements  android.
         this.getSupportActionBar().setHomeButtonEnabled(false);
         this.getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        ActionBar.Tab addProductsTab = getSupportActionBar().newTab().setText("Add Products").setTabListener(this);
-        ActionBar.Tab myProductsTab = getSupportActionBar().newTab().setText("My Products").setTabListener(this);
-        ActionBar.Tab productsTab = getSupportActionBar().newTab().setText("Products").setTabListener(this);
+        ActionBar.Tab addProductsTab = getSupportActionBar().newTab()
+                .setText(" Add Products")
+                .setTabListener(this)
+                .setIcon(R.drawable.add_product_icon);
+        ActionBar.Tab myProductsTab = getSupportActionBar().newTab()
+                .setText(" My Products")
+                .setTabListener(this)
+                .setIcon(R.drawable.my_products_icon);
+        ActionBar.Tab productsTab = getSupportActionBar().newTab()
+                .setText(" Products")
+                .setTabListener(this)
+                .setIcon(R.drawable.product_icon);
 
         getSupportActionBar().addTab(addProductsTab);
         getSupportActionBar().addTab(myProductsTab);
