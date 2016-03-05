@@ -6,13 +6,14 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import codebrains.crazysellout.Fragments.AddItemsFragment;
 import codebrains.crazysellout.Fragments.ProducerItemsFragment;
 import codebrains.crazysellout.Fragments.ProductsListActivity;
+import codebrains.crazysellout.Fragments.SalesmanUserFragment;
 
 /**
  * Class that initializes the tabs on the producer UI
  */
 public class ProducerTabsAdapter extends FragmentStatePagerAdapter {
 
-    private int TOTAL_TABS = 3;
+    private int TOTAL_TABS = 4;
 
     public ProducerTabsAdapter(FragmentManager fm) {
         super(fm);
@@ -24,12 +25,15 @@ public class ProducerTabsAdapter extends FragmentStatePagerAdapter {
 
         switch (index) {
             case 0:
-                return new AddItemsFragment();
+                return new SalesmanUserFragment();
 
             case 1:
-                return new ProducerItemsFragment();
+                return new AddItemsFragment();
 
             case 2:
+                return new ProducerItemsFragment();
+
+            case 3:
                 return new ProductsListActivity();
 
         }
