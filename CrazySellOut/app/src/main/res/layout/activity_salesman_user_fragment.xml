@@ -21,8 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/male_profile_image"/>
+            android:layout_gravity="center_horizontal"/>
 
         <TableLayout
             android:layout_width="match_parent"
@@ -46,7 +45,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Small Text"
                     android:id="@+id/textView19"
                     android:layout_column="2" />
             </TableRow>
@@ -149,7 +147,8 @@
                 <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:id="@+id/sexRdGp" >
                     <RadioButton android:id="@+id/maleRadioBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -66,6 +66,30 @@
 			
 		}
 		
+		//Method that retrieves all the data from a specific user.
+		public function RetrieveUserInfo(){
+		
+			$query = "SELECT * FROM users WHERE username='".$this->username."'";
+			$result = mysql_query($query);
+			
+			if($result === false || mysql_num_rows == 0){
+				$response["status"] = false;
+				$response["message"] = "An error occurred while retrieving the data! ".
+					"Please try again later or contact the support team.";
+				return $response;
+			}
+			
+			$account = mysql_fetch_array($result);
+			$response["username"] = "********";
+			$response["password"] = "********";
+			$response["number"] = $account['number'];
+			$response["email"] = $account['email'];
+			$response["sex"] = $account['type'];
+			$response["status"] = true;
+			
+			return $response;
+		}
+		
 	}
 
 
