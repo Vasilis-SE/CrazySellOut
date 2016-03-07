@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 import codebrains.crazysellout.AsyncTasks.AttemptToRetrieveUserInfo;
+import codebrains.crazysellout.Controllers.UpdateUserProfileController;
 import codebrains.crazysellout.Interfaces.IAsyncResponse;
 import codebrains.crazysellout.R;
 import codebrains.crazysellout.System.SystemDialogs;
@@ -22,8 +24,8 @@ import static codebrains.crazysellout.Activities.MainProducerActivity.GetUsernam
 public class SalesmanUserFragment extends Fragment implements IAsyncResponse{
 
     private TextView accountTv;
-    private EditText passwordEdt, retypeEdt, numberEdt, emailEdt;
-    private RadioGroup sexRadioGroup;
+    private static EditText passwordEdt, retypeEdt, numberEdt, emailEdt;
+    private static RadioGroup sexRadioGroup;
     private ImageView imageView;
 
     private AttemptToRetrieveUserInfo asyncTask;
@@ -88,6 +90,55 @@ public class SalesmanUserFragment extends Fragment implements IAsyncResponse{
             e.printStackTrace();
         }
 
+
+    }
+
+    /**
+     * Event method that occurs whenever the update button o the users profile is pressed.
+     * @param view The view of the activity that fired the event.
+     */
+    public void UpdateSalesmanProfileProcess(View view){
+
+        /*
+        passwordEdt = (EditText) view.findViewById(R.id.editText2);
+        retypeEdt = (EditText) view.findViewById(R.id.editText8);
+        numberEdt = (EditText) view.findViewById(R.id.editText9);
+        emailEdt = (EditText) view.findViewById(R.id.editText10);
+        sexRadioGroup = (RadioGroup) view.findViewById(R.id.sexRdGp);
+        */
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("username", GetUsername());
+            jsonObject.put("password", passwordEdt.getText().toString().trim());
+            jsonObject.put("retypePassword", retypeEdt.getText().toString());
+            jsonObject.put("number", numberEdt.getText().toString().trim());
+            jsonObject.put("email", emailEdt.getText().toString().trim());
+
+            int radioButtonID = this.sexRadioGroup.getCheckedRadioButtonId();
+            View radioButton = this.sexRadioGroup.findViewById(radioButtonID);
+            int idx = this.sexRadioGroup.indexOfChild(radioButton);
+            RadioButton sexRadioButton = (RadioButton) this.sexRadioGroup.getChildAt(idx);
+            jsonObject.put("sex", sexRadioButton.getText().toString());
+            jsonObject.put("status", true);
+            jsonObject.put("message", "");
+
+            String[] array = view.getResources().getStringArray(R.array.items);
+
+            UpdateUserProfileController uupc = new UpdateUserProfileController();
+            uupc.UserProfileUpdateControlMethod(jsonObject, array);
+
+            if(jsonObject.get("status") == false){
+                SystemDialogs.DisplayInformationAlertBox(jsonObject.get("message").toString(),
+                        "Update Dialog", (Activity) view.getContext());
+            }
+            else {
+                //TODO: call async task.
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 

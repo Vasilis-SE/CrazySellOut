@@ -16,6 +16,7 @@ import codebrains.crazysellout.Adapters.ProducerTabsAdapter;
 import codebrains.crazysellout.Fragments.AddItemsFragment;
 import codebrains.crazysellout.Fragments.ProducerItemsFragment;
 import codebrains.crazysellout.Fragments.ProductsListActivity;
+import codebrains.crazysellout.Fragments.SalesmanUserFragment;
 import codebrains.crazysellout.Models.ProductList;
 import codebrains.crazysellout.R;
 
@@ -29,6 +30,7 @@ public class MainProducerActivity extends ActionBarActivity implements  android.
     private AddItemsFragment aif;
     private ProductsListActivity pla;
     private ProducerItemsFragment pif;
+    private SalesmanUserFragment suf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class MainProducerActivity extends ActionBarActivity implements  android.
         this.aif = new AddItemsFragment();
         this.pla = new ProductsListActivity();
         this.pif = new ProducerItemsFragment();
+        this.suf = new SalesmanUserFragment();
 
         tabsviewPager = (ViewPager) findViewById(R.id.tabspager);
         mTabsAdapter = new ProducerTabsAdapter(getSupportFragmentManager());
@@ -134,6 +137,10 @@ public class MainProducerActivity extends ActionBarActivity implements  android.
 
     public void RefreshProducerItemsListProcess(View view){
         this.pif.RefreshProducerItemsListProcess(view);
+    }
+
+    public void UpdateSalesmanProfileProcess(View view){
+        this.suf.UpdateSalesmanProfileProcess(view);
     }
 
 }
