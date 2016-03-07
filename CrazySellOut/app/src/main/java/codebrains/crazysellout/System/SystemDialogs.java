@@ -12,7 +12,7 @@ import codebrains.crazysellout.Activities.MainActivity;
 public class SystemDialogs {
 
     //Constructor
-    public SystemDialogs(){
+    public SystemDialogs() {
 
     }
 
@@ -20,11 +20,11 @@ public class SystemDialogs {
      * Method that displays to the user an alert box that on ok selection it disappears (without
      * exiting the application).
      *
-     * @param message The message to be displayed to the user.
-     * @param title The title of the alert box.
+     * @param message     The message to be displayed to the user.
+     * @param title       The title of the alert box.
      * @param activityObj The object of the activity to be displayed to.
      */
-    public static void DisplayInformationAlertBox(String message, String title, Activity activityObj){
+    public static void DisplayInformationAlertBox(String message, String title, Activity activityObj) {
 
         AlertDialog.Builder builder1 = new AlertDialog.Builder(activityObj);
         builder1.setTitle(title);
@@ -45,11 +45,11 @@ public class SystemDialogs {
     /**
      * Method that displays to the user an alert box that on ok selection it exits the application.
      *
-     * @param message The message to be displayed to the user.
-     * @param title The title of the alert box.
+     * @param message     The message to be displayed to the user.
+     * @param title       The title of the alert box.
      * @param activityObj The object of the activity to be displayed to.
      */
-    public static void DisplayErrorAlertBox(String message, String title, final Activity activityObj){
+    public static void DisplayErrorAlertBox(String message, String title, final Activity activityObj) {
 
         AlertDialog.Builder builder1 = new AlertDialog.Builder(activityObj);
         builder1.setTitle(title);
@@ -66,6 +66,5 @@ public class SystemDialogs {
         alert11.show();
 
     }
-
 
 }

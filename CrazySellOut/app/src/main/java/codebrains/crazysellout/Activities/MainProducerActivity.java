@@ -143,4 +143,8 @@ public class MainProducerActivity extends ActionBarActivity implements  android.
         this.suf.UpdateSalesmanProfileProcess(view);
     }
 
+    public void DeleteSalesmanAccountProcess(View view){
+        this.suf.DeleteSalesmanAccountProcess(view);
+    }
+
 }

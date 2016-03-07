@@ -193,7 +193,8 @@
                 android:layout_height="wrap_content"
                 android:text="Delete"
                 android:id="@+id/button11"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:onClick="DeleteSalesmanAccountProcess"/>
 
         </LinearLayout>
 

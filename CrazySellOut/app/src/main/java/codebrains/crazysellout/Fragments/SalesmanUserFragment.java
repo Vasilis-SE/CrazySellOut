@@ -1,8 +1,10 @@
 package codebrains.crazysellout.Fragments;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import codebrains.crazysellout.AsyncTasks.AttemptToDeleteAccount;
 import codebrains.crazysellout.AsyncTasks.AttemptToRetrieveUserInfo;
 import codebrains.crazysellout.AsyncTasks.AttemptUpdateAccount;
 import codebrains.crazysellout.Controllers.UpdateUserProfileController;
@@ -31,6 +35,7 @@ public class SalesmanUserFragment extends Fragment implements IAsyncResponse{
 
     private AttemptToRetrieveUserInfo asyncTask;
     private AttemptUpdateAccount asyncTaskUpdated;
+    private AttemptToDeleteAccount asyncAccountDelete;
 
     //Constructor
     public SalesmanUserFragment(){
@@ -140,6 +145,36 @@ public class SalesmanUserFragment extends Fragment implements IAsyncResponse{
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+    }
+
+    /**
+     * Event method that occurs whenever the delete button in the salesman profile is pressed and
+     * it handles the account deletion.
+     * @param view The view of the activity that fired the event.
+     */
+    public void DeleteSalesmanAccountProcess(final View view){
+
+        new AlertDialog.Builder(view.getContext())
+            .setMessage("Are you sure you want to delete your account ?")
+            .setCancelable(false)
+            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put("username", GetUsername());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    asyncAccountDelete = new AttemptToDeleteAccount((Activity) view.getContext(), jsonObject);
+                    asyncAccountDelete.execute();
+
+                }
+            })
+            .setNegativeButton("No", null)
+            .show();
 
     }
 

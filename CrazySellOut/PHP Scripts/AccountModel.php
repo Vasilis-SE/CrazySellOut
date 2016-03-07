@@ -112,6 +112,24 @@
 			return $response;
 			
 		}
+		
+		//Method that handles the deletion of a account.
+		public function DeleteUsersAccount(){
+			
+			$query = "DELETE FROM users WHERE username='".$this->username."'";
+			$result = mysql_query($query);
+			
+			if($result === false){
+				$response["status"] = false;
+				$response["message"] = "Something went wrong while trying to delete the account from database!
+					Please try again later, or contact the support stuff.";
+				return $response;
+			}
+
+			$response["status"] = true;
+			$response["message"] = "Account has been deleted successfully!";
+			return $response;	
+		}
 	
 	}
 
