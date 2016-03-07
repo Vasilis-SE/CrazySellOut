@@ -50,29 +50,26 @@
 
 			return $response;
 		}
-		
+
 		//Method that checks if the login account given exists.
 		public function LoginAccountExists(){
-			
-			$response = false;
+
 			$query = "SELECT * FROM users WHERE (username='".$this->username."' AND password='".$this->password."')";
 			$result = mysql_query($query);
+			$row = mysql_fetch_array($result);
+
+			$arrayResult = array(mysql_num_rows($result), $row['type']);
 			
-			if(mysql_num_rows($result) == 1){
-				$response = true;
-			}
-			
-			return $response;
-			
+			return $arrayResult;
 		}
-		
+
 		//Method that retrieves all the data from a specific user.
 		public function RetrieveUserInfo(){
 		
 			$query = "SELECT * FROM users WHERE username='".$this->username."'";
 			$result = mysql_query($query);
 			
-			if($result === false || mysql_num_rows == 0){
+			if($result === false){
 				$response["status"] = false;
 				$response["message"] = "An error occurred while retrieving the data! ".
 					"Please try again later or contact the support team.";
@@ -84,17 +81,23 @@
 			$response["password"] = "********";
 			$response["number"] = $account['number'];
 			$response["email"] = $account['email'];
-			$response["sex"] = $account['type'];
+			$response["sex"] = $account['sex'];
 			$response["status"] = true;
 			
 			return $response;
 		}
-		
+
 		//Method that updates the account of a user.
-		public function UpdateUserAccount(){
-		
-			$query = "UPDATE users SET password='".$this->password."', number='".$this->number."', 
-				email='".$this->email."', sex='".$this->sex."' WHERE username='".$this->username."'";
+		public function UpdateUserAccount($passwordChange){
+					
+			if($passwordChange == true) {
+				$query = "UPDATE users SET password='".$this->password."', number='".$this->number."', 
+					email='".$this->email."', sex='".$this->sex."' WHERE username='".$this->username."'";
+			}
+			else {
+				$query = "UPDATE users SET number='".$this->number."', email='".$this->email."', sex='".$this->sex."' 
+					WHERE username='".$this->username."'";
+			}
 			$result = mysql_query($query);
 		
 			if($result === false){
@@ -109,8 +112,7 @@
 			return $response;
 			
 		}
-		
-		
+	
 	}
 
 
