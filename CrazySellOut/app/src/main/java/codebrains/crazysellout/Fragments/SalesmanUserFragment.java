@@ -13,7 +13,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import codebrains.crazysellout.AsyncTasks.AttemptDisplayFavorites;
 import codebrains.crazysellout.AsyncTasks.AttemptToRetrieveUserInfo;
+import codebrains.crazysellout.AsyncTasks.AttemptUpdateAccount;
 import codebrains.crazysellout.Controllers.UpdateUserProfileController;
 import codebrains.crazysellout.Interfaces.IAsyncResponse;
 import codebrains.crazysellout.R;
@@ -29,6 +32,7 @@ public class SalesmanUserFragment extends Fragment implements IAsyncResponse{
     private ImageView imageView;
 
     private AttemptToRetrieveUserInfo asyncTask;
+    private AttemptUpdateAccount asyncTaskUpdated;
 
     //Constructor
     public SalesmanUserFragment(){
@@ -99,13 +103,6 @@ public class SalesmanUserFragment extends Fragment implements IAsyncResponse{
      */
     public void UpdateSalesmanProfileProcess(View view){
 
-        /*
-        passwordEdt = (EditText) view.findViewById(R.id.editText2);
-        retypeEdt = (EditText) view.findViewById(R.id.editText8);
-        numberEdt = (EditText) view.findViewById(R.id.editText9);
-        emailEdt = (EditText) view.findViewById(R.id.editText10);
-        sexRadioGroup = (RadioGroup) view.findViewById(R.id.sexRdGp);
-        */
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("username", GetUsername());
@@ -122,6 +119,11 @@ public class SalesmanUserFragment extends Fragment implements IAsyncResponse{
             jsonObject.put("status", true);
             jsonObject.put("message", "");
 
+            if(retypeEdt.getText().toString().equals(""))
+                jsonObject.put("passwordChange", false);
+            else
+                jsonObject.put("passwordChange", true);
+
             String[] array = view.getResources().getStringArray(R.array.items);
 
             UpdateUserProfileController uupc = new UpdateUserProfileController();
@@ -132,7 +134,8 @@ public class SalesmanUserFragment extends Fragment implements IAsyncResponse{
                         "Update Dialog", (Activity) view.getContext());
             }
             else {
-                //TODO: call async task.
+                asyncTaskUpdated = new AttemptUpdateAccount((Activity) view.getContext(), jsonObject);
+                asyncTaskUpdated.execute();
             }
 
 

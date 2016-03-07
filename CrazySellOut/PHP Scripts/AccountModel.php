@@ -90,6 +90,27 @@
 			return $response;
 		}
 		
+		//Method that updates the account of a user.
+		public function UpdateUserAccount(){
+		
+			$query = "UPDATE users SET password='".$this->password."', number='".$this->number."', 
+				email='".$this->email."', sex='".$this->sex."' WHERE username='".$this->username."'";
+			$result = mysql_query($query);
+		
+			if($result === false){
+				$response["status"] = false;
+				$response["message"] = "Something went wrong while trying to update the data to database!
+					Please try again later, or contact the support stuff.";
+				return $response;
+			}
+			
+			$response["status"] = true;
+			$response["message"] = "Account has been updated successfully!";
+			return $response;
+			
+		}
+		
+		
 	}
 
 
