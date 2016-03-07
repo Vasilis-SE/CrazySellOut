@@ -13,8 +13,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import codebrains.crazysellout.AsyncTasks.AttemptDisplayFavorites;
 import codebrains.crazysellout.AsyncTasks.AttemptToRetrieveUserInfo;
 import codebrains.crazysellout.AsyncTasks.AttemptUpdateAccount;
 import codebrains.crazysellout.Controllers.UpdateUserProfileController;
