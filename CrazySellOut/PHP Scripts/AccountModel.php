@@ -142,6 +142,16 @@
 				return $response;
 			}
 			
+			$query2 = "DELETE FROM favorites WHERE username='".$this->username."'";
+			$result = mysql_query($query2);
+			
+			if($result === false){
+				$response["status"] = false;
+				$response["message"] = "Something went wrong while trying to delete the favorite product registries from database!
+					Please try again later, or contact the support stuff.";
+				return $response;
+			}
+			
 			$response["status"] = true;
 			$response["message"] = "Account has been deleted successfully!";
 			return $response;
@@ -161,7 +171,7 @@
 			}
 				
 			$query2 = "DELETE FROM products WHERE username='".$this->username."'";
-			$result = mysql_query($query);
+			$result = mysql_query($query2);
 			
 			if($result === false){
 				$response["status"] = false;

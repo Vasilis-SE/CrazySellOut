@@ -1,20 +1,25 @@
 package codebrains.crazysellout.Fragments;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
+import codebrains.crazysellout.Activities.MainUserActivity;
 import codebrains.crazysellout.AsyncTasks.AttemptToDeleteAccount;
 import codebrains.crazysellout.AsyncTasks.AttemptToRetrieveUserInfo;
 import codebrains.crazysellout.AsyncTasks.AttemptUpdateAccount;
+import codebrains.crazysellout.Controllers.UpdateUserProfileController;
 import codebrains.crazysellout.Interfaces.IAsyncResponse;
 import codebrains.crazysellout.R;
 import codebrains.crazysellout.System.SystemDialogs;
@@ -100,7 +105,47 @@ public class CustomerUserFragment extends Fragment implements IAsyncResponse {
      * Event on click that occurs when the update button on the profile of the user is pressed.
      * @param view The view of the activity that fired the event.
      */
-    public void UpdateSalesmanProfileProcess(View view){
+    public void UpdateCustomerProfileProcess(View view){
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("username", MainUserActivity.GetUsername());
+            jsonObject.put("password", passwordEdt.getText().toString().trim());
+            jsonObject.put("retypePassword", retypeEdt.getText().toString());
+            jsonObject.put("number", numberEdt.getText().toString().trim());
+            jsonObject.put("email", emailEdt.getText().toString().trim());
+
+            int radioButtonID = this.sexRadioGroup.getCheckedRadioButtonId();
+            View radioButton = this.sexRadioGroup.findViewById(radioButtonID);
+            int idx = this.sexRadioGroup.indexOfChild(radioButton);
+            RadioButton sexRadioButton = (RadioButton) this.sexRadioGroup.getChildAt(idx);
+            jsonObject.put("sex", sexRadioButton.getText().toString());
+            jsonObject.put("status", true);
+            jsonObject.put("message", "");
+
+            if(retypeEdt.getText().toString().equals(""))
+                jsonObject.put("passwordChange", false);
+            else
+                jsonObject.put("passwordChange", true);
+
+            String[] array = view.getResources().getStringArray(R.array.items);
+
+            UpdateUserProfileController uupc = new UpdateUserProfileController();
+            uupc.UserProfileUpdateControlMethod(jsonObject, array);
+
+            if(jsonObject.get("status") == false){
+                SystemDialogs.DisplayInformationAlertBox(jsonObject.get("message").toString(),
+                        "Update Dialog", (Activity) view.getContext());
+            }
+            else {
+                asyncTaskUpdated = new AttemptUpdateAccount((Activity) view.getContext(), jsonObject);
+                asyncTaskUpdated.execute();
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -108,8 +153,29 @@ public class CustomerUserFragment extends Fragment implements IAsyncResponse {
      * Event on click that occurs when the delete button on the profile of the user is pressed.
      * @param view The view of the activity that fired the event.
      */
-    public void DeleteSalesmanAccountProcess(View view){
+    public void DeleteCustomerAccountProcess(final View view){
 
+        new AlertDialog.Builder(view.getContext())
+            .setMessage("Are you sure you want to delete your account ?")
+            .setCancelable(false)
+            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put("username", MainUserActivity.GetUsername());
+                        jsonObject.put("type", "customer");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    asyncAccountDelete = new AttemptToDeleteAccount((Activity) view.getContext(), jsonObject);
+                    asyncAccountDelete.execute();
+
+                }
+            })
+            .setNegativeButton("No", null)
+            .show();
     }
 
     @Override

@@ -185,7 +185,7 @@
                 android:layout_height="wrap_content"
                 android:text="Update"
                 android:id="@+id/button10"
-                android:onClick="UpdateSalesmanProfileProcess"/>
+                android:onClick="UpdateCustomerProfileProcess"/>
 
             <Button
                 style="?android:attr/buttonStyleSmall"
@@ -194,7 +194,7 @@
                 android:text="Delete"
                 android:id="@+id/button11"
                 android:layout_marginLeft="10dp"
-                android:onClick="DeleteSalesmanAccountProcess"/>
+                android:onClick="DeleteCustomerAccountProcess"/>
 
         </LinearLayout>
 

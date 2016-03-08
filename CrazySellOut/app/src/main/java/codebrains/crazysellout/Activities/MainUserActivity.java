@@ -150,16 +150,16 @@ public class MainUserActivity extends ActionBarActivity implements  android.supp
      * Event on click that occurs when the update button on the profile of the user is pressed.
      * @param view The view of the activity that fired the event.
      */
-    public void UpdateSalesmanProfileProcess(View view){
-        this.cuf.UpdateSalesmanProfileProcess(view);
+    public void UpdateCustomerProfileProcess(View view){
+        this.cuf.UpdateCustomerProfileProcess(view);
     }
 
     /**
      * Event on click that occurs when the delete button on the profile of the user is pressed.
      * @param view The view of the activity that fired the event.
      */
-    public void DeleteSalesmanAccountProcess(View view){
-        this.cuf.DeleteSalesmanAccountProcess(view);
+    public void DeleteCustomerAccountProcess(View view){
+        this.cuf.DeleteCustomerAccountProcess(view);
     }
 
 }
