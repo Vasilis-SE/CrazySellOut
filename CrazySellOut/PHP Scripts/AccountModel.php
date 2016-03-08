@@ -114,7 +114,23 @@
 		}
 		
 		//Method that handles the deletion of a account.
-		public function DeleteUsersAccount(){
+		public function DeleteUsersAccount($accountType){
+			
+			if($accountType == 'salesman') {
+			
+				$response = $this->DeleteSalesmanAccountAndDataRelativeToHim();
+				return $response;
+			}
+			else {
+			
+				$response = $this->DeleteConsumerAccount();
+				return $response;
+			}
+	
+		}
+		
+		//Method that deletes the consumers account from the database.
+		public function DeleteConsumerAccount(){
 			
 			$query = "DELETE FROM users WHERE username='".$this->username."'";
 			$result = mysql_query($query);
@@ -125,15 +141,42 @@
 					Please try again later, or contact the support stuff.";
 				return $response;
 			}
-
+			
 			$response["status"] = true;
 			$response["message"] = "Account has been deleted successfully!";
-			return $response;	
+			return $response;
 		}
+		
+		//Method that deletes the account of a salesman along with his products.
+		public function DeleteSalesmanAccountAndDataRelativeToHim(){
+			
+			$query = "DELETE FROM users WHERE username='".$this->username."'";
+			$result = mysql_query($query);
+			
+			if($result === false){
+				$response["status"] = false;
+				$response["message"] = "Something went wrong while trying to delete the account from database!
+					Please try again later, or contact the support stuff.";
+				return $response;
+			}
+				
+			$query2 = "DELETE FROM products WHERE username='".$this->username."'";
+			$result = mysql_query($query);
+			
+			if($result === false){
+				$response["status"] = false;
+				$response["message"] = "Something went wrong while trying to delete the products registered by his account from database!
+					Please try again later, or contact the support stuff.";
+				return $response;
+			}
+	
+			$response["status"] = true;
+			$response["message"] = "Account has been deleted successfully!";
+			return $response;
+		}
+		
+		
 	
 	}
-
-
-
 
 ?>

@@ -164,6 +164,7 @@ public class SalesmanUserFragment extends Fragment implements IAsyncResponse{
                     JSONObject jsonObject = new JSONObject();
                     try {
                         jsonObject.put("username", GetUsername());
+                        jsonObject.put("type", "salesman");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

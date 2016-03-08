@@ -6,9 +6,10 @@
 		
 		$jsonObj = json_decode(stripslashes($_POST['accountJSON']));
 		$username = md5($jsonObj->username);
+		$type = $jsonObj->type;
 		$accountObj = new Account($username, "", "", "", "", "");
 
-		$response = $accountObj->DeleteUsersAccount();	
+		$response = $accountObj->DeleteUsersAccount($type);	
 		die(json_encode($response));
 
 	}
