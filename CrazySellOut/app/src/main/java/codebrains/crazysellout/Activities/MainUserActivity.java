@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
 import codebrains.crazysellout.Adapters.UserTabsAdapter;
+import codebrains.crazysellout.Fragments.CustomerUserFragment;
 import codebrains.crazysellout.Fragments.UserFavoritesFragment;
 import codebrains.crazysellout.Fragments.UserProductListFragment;
 import codebrains.crazysellout.R;
@@ -22,6 +23,7 @@ public class MainUserActivity extends ActionBarActivity implements  android.supp
 
     private UserProductListFragment uplf;
     private UserFavoritesFragment uff;
+    private CustomerUserFragment cuf;
 
 
     @Override
@@ -40,10 +42,15 @@ public class MainUserActivity extends ActionBarActivity implements  android.supp
 
         this.uplf = new UserProductListFragment();
         this.uff = new UserFavoritesFragment();
+        this.cuf = new CustomerUserFragment();
 
         this.getSupportActionBar().setHomeButtonEnabled(false);
         this.getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
+        Tab customerProfTab = getSupportActionBar().newTab()
+                .setText(" Profile")
+                .setTabListener(this)
+                .setIcon(R.drawable.user_profile_icon);
         Tab productsTab = getSupportActionBar().newTab()
                 .setText(" Products")
                 .setTabListener(this)
@@ -57,6 +64,7 @@ public class MainUserActivity extends ActionBarActivity implements  android.supp
                 .setTabListener(this)
                 .setIcon(R.drawable.location_pin_icon);
 
+        getSupportActionBar().addTab(customerProfTab);
         getSupportActionBar().addTab(productsTab);
         getSupportActionBar().addTab(favoritesTab);
         getSupportActionBar().addTab(mapTab);
@@ -136,6 +144,22 @@ public class MainUserActivity extends ActionBarActivity implements  android.supp
      */
     public void DeleteFavoriteFromListProcess(View view){
         this.uff.DeleteFavoriteFromListProcess(view);
+    }
+
+    /**
+     * Event on click that occurs when the update button on the profile of the user is pressed.
+     * @param view The view of the activity that fired the event.
+     */
+    public void UpdateSalesmanProfileProcess(View view){
+        this.cuf.UpdateSalesmanProfileProcess(view);
+    }
+
+    /**
+     * Event on click that occurs when the delete button on the profile of the user is pressed.
+     * @param view The view of the activity that fired the event.
+     */
+    public void DeleteSalesmanAccountProcess(View view){
+        this.cuf.DeleteSalesmanAccountProcess(view);
     }
 
 }

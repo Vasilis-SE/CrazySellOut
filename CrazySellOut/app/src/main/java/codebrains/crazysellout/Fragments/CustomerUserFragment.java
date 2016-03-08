@@ -6,11 +6,32 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import org.json.JSONException;
+import org.json.JSONObject;
+import codebrains.crazysellout.AsyncTasks.AttemptToDeleteAccount;
+import codebrains.crazysellout.AsyncTasks.AttemptToRetrieveUserInfo;
+import codebrains.crazysellout.AsyncTasks.AttemptUpdateAccount;
 import codebrains.crazysellout.Interfaces.IAsyncResponse;
 import codebrains.crazysellout.R;
+import codebrains.crazysellout.System.SystemDialogs;
+
+import static codebrains.crazysellout.Activities.MainUserActivity.GetUsername;
+
 
 public class CustomerUserFragment extends Fragment implements IAsyncResponse {
+
+    private TextView accountTv;
+    private static EditText passwordEdt, retypeEdt, numberEdt, emailEdt;
+    private static RadioGroup sexRadioGroup;
+    private ImageView imageView;
+
+    private AttemptToRetrieveUserInfo asyncTask;
+    private AttemptUpdateAccount asyncTaskUpdated;
+    private AttemptToDeleteAccount asyncAccountDelete;
 
     //Constructor
     public CustomerUserFragment(){
@@ -22,11 +43,94 @@ public class CustomerUserFragment extends Fragment implements IAsyncResponse {
 
         View view = inflater.inflate(R.layout.activity_customer_user_fragment, container, false);
 
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("username", GetUsername());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        asyncTask = new AttemptToRetrieveUserInfo((Activity) view.getContext(), jsonObject);
+        asyncTask.delegate = this;
+        asyncTask.execute();
+
         return view;
+    }
+
+    /**
+     * Method that handles the display of user info into the user profile from the response of the
+     * server.
+     * @param jsonObject The json object that contains all the user info needed.
+     * @param activity The activity object that called the method.
+     */
+    private void DisplayUserInfoIntoProfile(JSONObject jsonObject, Activity activity){
+
+        accountTv = (TextView) activity.findViewById(R.id.customerAccountTv);
+        passwordEdt = (EditText) activity.findViewById(R.id.customerPasswordEdt);
+        retypeEdt = (EditText) activity.findViewById(R.id.customerRetypePassEdt);
+        numberEdt = (EditText) activity.findViewById(R.id.customerNumberEdt);
+        emailEdt = (EditText) activity.findViewById(R.id.customerEmailEdt);
+        sexRadioGroup = (RadioGroup) activity.findViewById(R.id.customerSexRdGp);
+        imageView = (ImageView) activity.findViewById(R.id.customerImageView);
+
+        try {
+
+            accountTv.setText(jsonObject.get("username").toString());
+            passwordEdt.setText(jsonObject.get("password").toString());
+            numberEdt.setText(jsonObject.get("number").toString());
+            emailEdt.setText(jsonObject.get("email").toString());
+
+            if(jsonObject.get("sex").equals("Male")){
+                sexRadioGroup.check(R.id.maleRadioBtn);
+                imageView.setBackgroundResource(R.drawable.male_profile_image);
+            }
+            else {
+                sexRadioGroup.check(R.id.femaleRadioBtn);
+                imageView.setBackgroundResource(R.drawable.female_profile_image);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    /**
+     * Event on click that occurs when the update button on the profile of the user is pressed.
+     * @param view The view of the activity that fired the event.
+     */
+    public void UpdateSalesmanProfileProcess(View view){
+
+    }
+
+    /**
+     * Event on click that occurs when the delete button on the profile of the user is pressed.
+     * @param view The view of the activity that fired the event.
+     */
+    public void DeleteSalesmanAccountProcess(View view){
+
     }
 
     @Override
     public void ProcessFinish(String output, Activity activity) {
 
+        try {
+            JSONObject jsonObject = new JSONObject(output);
+
+            if(jsonObject.get("status") == false){
+                SystemDialogs.DisplayInformationAlertBox(jsonObject.get("message").toString(),
+                        "User Profile Dialog", activity);
+            }
+            else{
+                DisplayUserInfoIntoProfile(jsonObject, activity);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
+
+
 }
