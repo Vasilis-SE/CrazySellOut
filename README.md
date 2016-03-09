@@ -1,4 +1,4 @@
-# CrazySellOut_Repo
+# CrazySellOut
 ***
 Android application which presents discounts / offerings of products that are submitted by shopkeepers.
 All those data are stored in a remote server, and are displayed to the user through list of items or through the google maps.
@@ -22,3 +22,4 @@ You can add your product offerings into the system that way advertising your sto
 
  
 ![](https://github.com/AlcatrazGR/CrazySellOut_Repo/blob/master/CrazySellOut/CrazySellOut%20Application%20Images/device-2016-03-09-101826.jpg) 
+![](https://github.com/AlcatrazGR/CrazySellOut_Repo/blob/master/CrazySellOut/CrazySellOut%20Application%20Images/device-2016-03-09-101734.png) 
