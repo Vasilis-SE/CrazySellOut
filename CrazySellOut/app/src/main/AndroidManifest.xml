@@ -68,7 +68,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="APIKEY" />
-
+        
         <activity
             android:name=".Fragments.MapsFragment"
             android:label="@string/title_activity_maps_fragment" >
