@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,6 @@ public class SalesmanUserFragment extends Fragment implements IAsyncResponse{
     private static EditText passwordEdt, retypeEdt, numberEdt, emailEdt;
     private static RadioGroup sexRadioGroup;
     private ImageView imageView;
-
     private AttemptToRetrieveUserInfo asyncTask;
     private AttemptUpdateAccount asyncTaskUpdated;
     private AttemptToDeleteAccount asyncAccountDelete;

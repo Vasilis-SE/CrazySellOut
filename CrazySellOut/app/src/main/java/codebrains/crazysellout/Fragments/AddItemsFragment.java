@@ -3,7 +3,6 @@ package codebrains.crazysellout.Fragments;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,22 +12,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-
 import codebrains.crazysellout.AsyncTasks.AttemptAddProduct;
 import codebrains.crazysellout.Controllers.AddProductController;
 import codebrains.crazysellout.R;
 import codebrains.crazysellout.System.Conversions;
 import codebrains.crazysellout.System.Coordinates;
-import codebrains.crazysellout.System.JSONParser;
 import codebrains.crazysellout.System.SystemDialogs;
 
 import static codebrains.crazysellout.Activities.MainProducerActivity.GetUsername;

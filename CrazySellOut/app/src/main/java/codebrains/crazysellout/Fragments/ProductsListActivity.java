@@ -29,11 +29,10 @@ public class ProductsListActivity extends Fragment implements IAsyncResponse{
     private ExpandableListView expListView;
     private HashMap<String, List<String>> listDataChild;
     private List<String> listDataHeader;
-
     private EditText sortingEdtText;
     private Spinner spinner;
-
     private String response;
+
 
     //Constructor
     public ProductsListActivity() {

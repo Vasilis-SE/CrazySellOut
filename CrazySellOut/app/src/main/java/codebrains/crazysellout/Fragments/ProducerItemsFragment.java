@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,6 @@ public class ProducerItemsFragment extends Fragment implements IAsyncResponse {
     private ListView listView;
     private View view;
     private AttemptDisplayUserProducts asyncTask;
-
     private String response;
 
     //Constructor
@@ -54,25 +54,24 @@ public class ProducerItemsFragment extends Fragment implements IAsyncResponse {
         asyncTask.delegate = this;
         asyncTask.execute();
 
+
         //List view click item listener.
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                try {
-                    JSONObject jsonObject1 = new JSONObject(response);
-                    JSONArray jsonArray = (JSONArray) jsonObject1.get("message");
-                    JSONObject selectedItemJSON = (JSONObject) jsonArray.get(position);
+            try {
+                JSONObject jsonObject1 = new JSONObject(response);
+                JSONArray jsonArray = (JSONArray) jsonObject1.get("message");
+                JSONObject selectedItemJSON = (JSONObject) jsonArray.get(position);
 
-                    Intent myIntent = new Intent(view.getContext(), ProductCustomizationActivity.class);
-                    myIntent.putExtra("selectedItem", String.valueOf(selectedItemJSON));
-                    startActivity(myIntent);
+                Intent myIntent = new Intent(view.getContext(), ProductCustomizationActivity.class);
+                myIntent.putExtra("selectedItem", String.valueOf(selectedItemJSON));
+                startActivity(myIntent);
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             }
         });
 
